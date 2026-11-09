@@ -1,224 +1,300 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
+import { Microscope, ArrowLeft, ExternalLink, Cpu, GitBranch, CheckCircle2, Award, BookOpen, Layers, BarChart3, Database } from 'lucide-react';
+import { researchData } from '../data/researchData';
 import ResearchCarousel from './ResearchCarousel';
-import { Microscope, Activity, GitBranch, Beaker, Code, Play, ExternalLink, ArrowRight } from 'lucide-react';
 
-// 2. Next-Level Research View
-const ResearchView = () => {
-    const publicationsRef = useRef(null);
-    const [publicationsInView, setPublicationsInView] = useState(false);
+const ResearchView = ({ navigateToMain }) => {
 
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) {
-                    setPublicationsInView(true);
-                    observer.disconnect();
-                }
-            },
-            { threshold: 0.1 }
-        );
+  return (
+    <div className="pt-24 min-h-screen bg-[#070A10] text-slate-300 font-sans animate-fade-in relative overflow-x-hidden selection:bg-brand-orange selection:text-white">
 
-        let currentRef = publicationsRef.current;
-        if (currentRef) {
-            observer.observe(currentRef);
-        }
+      {/* Atmospheric Background Lighting */}
+      <div className="fixed inset-0 pointer-events-none z-0">
+        <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-brand-orange/10 rounded-full blur-[160px]" />
+        <div className="absolute bottom-1/4 left-10 w-[500px] h-[500px] bg-emerald-500/5 rounded-full blur-[150px]" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:48px_48px] opacity-40" />
+      </div>
 
-        return () => {
-            if (currentRef) {
-                observer.unobserve(currentRef);
-            }
-        };
-    }, []);
+      <div className="max-w-7xl mx-auto px-6 sm:px-10 relative z-10">
 
-    const publications = [
-        {
-            title: 'Deep CNN for Plant Disease Detection in Rice Crops',
-            description: 'A novel approach to identifying Brown Spot and Leaf Blast diseases using transfer learning.',
-            venue: 'IEEE International Conference on Image Processing (ICIP)',
-            year: '2025',
-            image: 'https://images.unsplash.com/photo-1581092921462-698338d35393?q=80&w=2070&auto=format&fit=crop',
-            scholarLink: 'https://scholar.google.com/scholar?q=deep+cnn+plant+disease',
-        },
-        {
-            title: 'Scalable Framework for Multi-Crop Disease Classification',
-            description: 'An extendable architecture for applying CNN-based disease detection to new crop types.',
-            venue: 'Journal of Agricultural AI',
-            year: '2024',
-            image: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=2070&auto=format&fit=crop',
-            scholarLink: 'https://scholar.google.com/scholar?q=scalable+framework+crop+disease',
-        }
-    ];
+        {/* Back navigation bar */}
+        <div className="py-6 flex items-center justify-between border-b border-white/10 mb-12">
+          <button
+            onClick={navigateToMain}
+            className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-white/5 hover:bg-brand-orange hover:text-white border border-white/10 text-xs font-mono font-bold tracking-wider text-slate-300 transition-all duration-200"
+          >
+            <ArrowLeft size={16} />
+            <span>RETURN TO MAIN PORTFOLIO</span>
+          </button>
 
-    return (
-        <div className="pt-20 min-h-screen bg-gradient-to-b from-black via-slate-950 to-black text-slate-300 font-sans animate-fade-in relative">
-
-            {/* Cinematic Background */}
-            <div className="fixed inset-0 pointer-events-none z-0">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(56,189,248,0.03),transparent_70%)]"></div>
-                <div className="absolute w-full h-full bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10"></div>
-                <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
-            </div>
-
-            {/* Hero Section */}
-            <section className="relative z-10 min-h-[60vh] flex flex-col justify-center px-6">
-                <div className="max-w-7xl mx-auto w-full">
-                    <div className="flex items-center gap-4 mb-6">
-                        <span className="flex h-3 w-3 relative">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                            <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
-                        </span>
-                        <span className="font-mono text-red-400 text-sm tracking-widest uppercase">Live Environment</span>
-                    </div>
-
-                    <h1 className="text-6xl md:text-9xl font-black text-white mb-8 tracking-tighter leading-none mix-blend-screen">
-                        RESEARCH <br />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-700 to-slate-500">LAB_01</span>
-                    </h1>
-
-                    <div className="grid md:grid-cols-3 gap-8 border-t border-white/10 pt-8">
-                        <div className="space-y-2">
-                            <div className="text-xs text-slate-500 font-mono uppercase">Primary Focus</div>
-                            <div className="text-xl text-white font-medium">Deep Learning & <br /> Plant Pathology</div>
-                        </div>
-                        <div className="space-y-2">
-                            <div className="text-xs text-slate-500 font-mono uppercase">Current Status</div>
-                            <div className="text-xl text-cyan-400 font-mono">
-                                MODEL_TRAINING <br />
-                                <span className="text-xs text-slate-500">Validation Acc: 94%+</span>
-                            </div>
-                        </div>
-                        <div className="space-y-2">
-                            <div className="text-xs text-slate-500 font-mono uppercase">Affiliation</div>
-                            <div className="text-xl text-white font-medium">University of Ruhuna <br /> Department Of Computer Science</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Methodology Pipeline (REDESIGNED) */}
-            <section className="py-32 bg-slate-900/50 relative z-10 overflow-hidden">
-                <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
-                <div className="max-w-7xl mx-auto px-6">
-                    <div className="text-center mb-20">
-                        <h2 className="text-4xl font-bold text-white mb-4 flex items-center justify-center gap-3">
-                            <GitBranch className="text-cyan-500" /> Research Pipeline
-                        </h2>
-                        <p className="text-slate-400 text-lg max-w-2xl mx-auto">A systematic, four-stage process from data acquisition to model validation.</p>
-                    </div>
-
-                    <div className="relative">
-                        {/* The static track and animated connector line */}
-                        <div className="absolute top-10 left-0 w-full h-0.5 bg-slate-700"></div>
-                        <div className="absolute top-10 left-0 w-full h-0.5">
-                            <div className="w-full h-full bg-gradient-to-r from-cyan-500/0 via-cyan-500 to-cyan-500/0 animate-flow-beam"></div>
-                        </div>
-
-                        <div className="relative flex flex-wrap justify-center gap-y-12 sm:justify-between">
-                            {[
-                                { title: "Data Collection", desc: "Gathering real-world leaf images of Rice & Chilli crops in diverse field conditions.", icon: <Beaker size={28} /> },
-                                { title: "Preprocessing", desc: "Data cleaning, augmentation, and labeling to ensure robust model training.", icon: <Code size={28} /> },
-                                { title: "Model Design", desc: "Training Convolutional Neural Networks (CNNs) to identify disease patterns.", icon: <Play size={28} /> },
-                                { title: "Evaluation", desc: "Validating detection accuracy and refining the architecture for real-world use.", icon: <Activity size={28} /> }
-                            ].map((item, idx) => (
-                                <div key={idx} className="relative group flex flex-col items-center text-center w-full sm:w-1/2 md:w-1/4 max-w-[280px]">
-                                    <div className="relative w-20 h-20 flex items-center justify-center mb-6">
-                                        {/* Static outer ring */}
-                                        <div className="absolute inset-0 rounded-full bg-slate-800 border-2 border-slate-700"></div>
-                                        {/* Animated inner rings/glow on hover */}
-                                        <div className="absolute inset-0 rounded-full border-2 border-cyan-500/50 opacity-0 group-hover:opacity-100 group-hover:animate-ping-slow transition-opacity duration-300"></div>
-                                        <div className="absolute inset-2 rounded-full bg-slate-900 group-hover:bg-cyan-900/40 transition-colors duration-300"></div>
-                                        <div className="relative z-10 text-cyan-400 group-hover:text-white transition-colors duration-300">
-                                            {item.icon}
-                                        </div>
-                                    </div>
-                                    <div className="text-center">
-                                        <div className="font-mono text-cyan-400 text-sm">STEP {`0${idx + 1}`}</div>
-                                        <h3 className="text-2xl font-bold text-white mt-1">{item.title}</h3>
-                                        <p className="text-slate-400 text-base mt-3 h-0 opacity-0 group-hover:h-24 group-hover:opacity-100 transition-all duration-500 ease-in-out">
-                                            {item.desc}
-                                        </p>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Image Swipe Component */}
-            <section className="py-32 relative z-10">
-                <div className="max-w-7xl mx-auto px-6">
-                    <ResearchCarousel items={[
-                        {
-                            image: 'https://images.unsplash.com/photo-1586771107445-d3ca888129ff?auto=format&fit=crop&q=80&w=2072',
-                            title: 'Rice Leaf Analysis',
-                            description: 'High-resolution imagery of rice crops used for training disease detection models.'
-                        },
-                        {
-                            image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=2065&auto=format&fit=crop',
-                            title: 'Chilli Crop Inspection',
-                            description: 'Field data collection for chilli plants, capturing various stages of growth and health.'
-                        },
-                        {
-                            image: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&q=80&w=2070',
-                            title: 'CNN Model Architecture',
-                            description: 'Visualizing the convolutional neural network pipeline for image processing and classification.'
-                        }
-                    ]} />
-                </div>
-            </section>
-
-            {/* NEW PUBLICATIONS SECTION */}
-            <section ref={publicationsRef} className="py-32 relative z-10">
-                <div className="max-w-7xl mx-auto px-6">
-                    <div className="text-left mb-16">
-                        <h2 className="text-4xl font-bold text-white mb-4">Publications & Citations</h2>
-                        <p className="text-slate-400 max-w-2xl text-lg">
-                            A selection of peer-reviewed papers and articles. For a complete list, please view my Google Scholar profile.
-                        </p>
-                    </div>
-
-                    <div className="grid md:grid-cols-2 gap-8">
-                        {publications.map((pub, i) => (
-                            <div
-                                key={i}
-                                className={`group relative bg-slate-900/50 border border-slate-800 rounded-2xl overflow-hidden transition-all duration-500 ease-out ${publicationsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
-                                style={{ transitionDelay: `${200 + i * 150}ms` }}
-                            >
-                                <div className="absolute inset-0 w-full h-full">
-                                    <img src={pub.image} alt="Abstract representation" className="w-full h-full object-cover opacity-10 group-hover:opacity-20 transition-opacity duration-300" />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/80 to-transparent"></div>
-                                </div>
-                                <div className="relative p-8 h-full flex flex-col">
-                                    <div className="flex-grow">
-                                        <p className="text-sm font-mono text-cyan-400 mb-2">{pub.year} / {pub.venue}</p>
-                                        <h3 className="text-2xl font-bold text-white mb-3 relative">
-                                            {pub.title}
-                                            <span className="absolute left-0 -bottom-2 h-0.5 w-0 bg-cyan-400 transition-all duration-500 group-hover:w-full"></span>
-                                        </h3>
-                                        <p className="text-slate-400 leading-relaxed">{pub.description}</p>
-                                    </div>
-                                    <div className="mt-6 pt-6 border-t border-slate-800/50">
-                                        <a href={pub.scholarLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm font-bold text-slate-300 hover:text-cyan-400 transition-colors group/link">
-                                            Read on Google Scholar
-                                            <ExternalLink className="w-4 h-4 transition-transform group-hover/link:translate-x-1" />
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-
-                    <div className="mt-16 text-center">
-                        <a href="https://scholar.google.com/citations?user=your-scholar-id" target="_blank" rel="noopener noreferrer" className="group relative inline-flex items-center justify-center px-8 py-4 bg-transparent border-2 border-slate-700 rounded-full text-lg font-bold text-white transition-all duration-300 overflow-hidden hover:border-cyan-500 hover:shadow-[0_0_20px_rgba(6,182,212,0.5)]">
-                            <span className="absolute inset-0 w-0 bg-cyan-500/20 transition-all duration-300 ease-out group-hover:w-full"></span>
-                            <span className="relative">View Full Scholar Profile</span>
-                        </a>
-                    </div>
-                </div>
-            </section>
+          <div className="inline-flex items-center gap-2 text-xs font-mono text-emerald-400 bg-emerald-500/10 px-3.5 py-1.5 rounded-full border border-emerald-500/20">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span>ACTIVE RESEARCH PIPELINE</span>
+          </div>
         </div>
-    );
+
+        {/* Lab Hero */}
+        <div className="max-w-4xl mb-20">
+          <div className="inline-flex items-center gap-2 text-xs font-mono font-bold tracking-widest text-brand-orange uppercase mb-4">
+            <Microscope size={16} />
+            <span>ACADEMIC RESEARCH LAB</span>
+          </div>
+          <h1 className="font-display font-black text-5xl sm:text-7xl lg:text-8xl text-white uppercase tracking-tight leading-[1.02] mb-6">
+            Deep Learning for <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-orange via-amber-300 to-orange-500 italic drop-shadow-[0_4px_24px_rgba(255,85,0,0.3)]">
+              Plant Pathology.
+            </span>
+          </h1>
+          <p className="font-sans text-lg sm:text-xl text-slate-400 leading-relaxed font-light max-w-3xl">
+            Undergraduate machine learning research at the University of Ruhuna, applying deep convolutional neural networks and transfer learning architectures to identify foliar diseases in Sri Lankan rice crops.
+          </p>
+
+          <div className="grid sm:grid-cols-3 gap-6 mt-12 pt-8 border-t border-white/10">
+            <div>
+              <div className="text-xs font-mono text-slate-500 uppercase tracking-wider mb-1">Affiliation</div>
+              <div className="text-white font-sans font-bold text-base">University of Ruhuna</div>
+              <div className="text-xs text-slate-400">Department of Computer Science</div>
+            </div>
+            <div>
+              <div className="text-xs font-mono text-slate-500 uppercase tracking-wider mb-1">Target Crop Pathology</div>
+              <div className="text-white font-sans font-bold text-base">Oryza sativa (Rice)</div>
+              <div className="text-xs text-slate-400">Brown Spot, Leaf Blast, Bacterial Blight</div>
+            </div>
+            <div>
+              <div className="text-xs font-mono text-slate-500 uppercase tracking-wider mb-1">Top Model Accuracy</div>
+              <div className="text-brand-orange font-mono font-bold text-2xl">95.27% <span className="text-xs text-slate-400 font-sans font-normal">Val</span></div>
+              <div className="text-xs text-emerald-400 font-mono">92.62% Test Accuracy</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Metrics Grid */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-24">
+          {researchData.metrics.map((m, idx) => (
+            <div
+              key={idx}
+              className="bg-slate-900/80 backdrop-blur-md rounded-3xl p-6 sm:p-7 border border-white/10 relative overflow-hidden"
+            >
+              <div className="text-xs font-mono uppercase text-brand-orange tracking-wider mb-2">
+                {m.label}
+              </div>
+              <div className="font-display font-bold text-4xl sm:text-5xl text-white mb-2 tracking-tight">
+                {m.value}{m.unit}
+              </div>
+              <p className="font-sans text-xs sm:text-sm text-slate-400 font-light">
+                {m.caption}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        {/* Systematic 4-Stage Methodology */}
+        <div className="mb-28">
+          <div className="mb-12">
+            <div className="inline-flex items-center gap-2 text-xs font-mono font-bold tracking-widest text-brand-orange uppercase mb-2">
+              <GitBranch size={14} />
+              <span>SYSTEMATIC WORKFLOW</span>
+            </div>
+            <h2 className="font-display font-bold text-3xl sm:text-4xl text-white uppercase tracking-tight">
+              Four-Stage Research Pipeline
+            </h2>
+            <p className="font-sans text-slate-400 text-sm sm:text-base mt-2 font-light">
+              From field data acquisition across diverse agro-ecological zones to model evaluation and inference optimization.
+            </p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {researchData.pipeline.map((item, idx) => (
+              <div
+                key={idx}
+                className="bg-slate-900/60 rounded-3xl p-7 border border-white/10 hover:border-brand-orange/40 transition-all flex flex-col justify-between group"
+              >
+                <div>
+                  <div className="font-mono text-3xl font-extrabold text-brand-orange/40 group-hover:text-brand-orange transition-colors mb-4">
+                    {item.step}
+                  </div>
+                  <h3 className="font-display font-bold text-xl text-white mb-3">
+                    {item.title}
+                  </h3>
+                  <p className="font-sans text-xs sm:text-sm text-slate-400 font-light leading-relaxed">
+                    {item.desc}
+                  </p>
+                </div>
+                <div className="mt-6 pt-4 border-t border-white/5 flex items-center gap-2 text-xs font-mono text-slate-500">
+                  <CheckCircle2 size={13} className="text-emerald-400" />
+                  <span>Validated Protocol</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Benchmark Matrix */}
+        <div className="mb-28 bg-slate-900/70 rounded-3xl p-8 sm:p-10 border border-white/10 backdrop-blur-md">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+            <div>
+              <div className="inline-flex items-center gap-2 text-xs font-mono font-bold tracking-widest text-brand-orange uppercase mb-2">
+                <BarChart3 size={14} />
+                <span>EMPIRICAL BENCHMARKS</span>
+              </div>
+              <h2 className="font-display font-bold text-2xl sm:text-3xl text-white uppercase tracking-tight">
+                Model Architecture Comparison
+              </h2>
+            </div>
+            <div className="text-xs font-mono text-slate-400">
+              Evaluated on identical 70/20/10 split
+            </div>
+          </div>
+
+          <div className="overflow-x-auto">
+            <table className="w-full text-left font-sans text-sm">
+              <thead>
+                <tr className="border-b border-white/10 text-xs font-mono text-slate-400 uppercase tracking-wider">
+                  <th className="py-4 px-4">Architecture</th>
+                  <th className="py-4 px-4">Validation Acc</th>
+                  <th className="py-4 px-4">Test Acc</th>
+                  <th className="py-4 px-4">Parameters</th>
+                  <th className="py-4 px-4">Classification Status</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-white/5">
+                {researchData.benchmarks.map((b, idx) => (
+                  <tr
+                    key={idx}
+                    className={`hover:bg-white/5 transition-colors ${
+                      b.model.includes('Selected') ? 'bg-brand-orange/10 font-bold' : ''
+                    }`}
+                  >
+                    <td className="py-4 px-4 text-white font-mono flex items-center gap-2">
+                      {b.model.includes('Selected') && <span className="w-2 h-2 rounded-full bg-brand-orange" />}
+                      <span>{b.model}</span>
+                    </td>
+                    <td className="py-4 px-4 text-brand-orange font-mono font-bold">{b.valAcc}</td>
+                    <td className="py-4 px-4 text-slate-300 font-mono">{b.testAcc}</td>
+                    <td className="py-4 px-4 text-slate-400 font-mono">{b.params}</td>
+                    <td className="py-4 px-4">
+                      <span className={`px-2.5 py-1 rounded-full text-xs font-mono ${
+                        b.model.includes('Selected')
+                          ? 'bg-brand-orange/20 text-brand-orange border border-brand-orange/30 font-bold'
+                          : 'bg-white/5 text-slate-400 border border-white/10'
+                      }`}>
+                        {b.status}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        {/* Field Imagery Visualizer */}
+        <div className="mb-28">
+          <div className="mb-8">
+            <div className="inline-flex items-center gap-2 text-xs font-mono font-bold tracking-widest text-brand-orange uppercase mb-2">
+              <Layers size={14} />
+              <span>DATASET SAMPLES</span>
+            </div>
+            <h2 className="font-display font-bold text-3xl sm:text-4xl text-white uppercase tracking-tight">
+              Field Specimen Visualizer
+            </h2>
+          </div>
+
+          <ResearchCarousel
+            items={[
+              {
+                image: 'https://images.unsplash.com/photo-1586771107445-d3ca888129ff?auto=format&fit=crop&q=80&w=2072',
+                title: 'Rice Leaf Brown Spot Pathology',
+                description: 'Field specimens exhibiting characteristic Helminthosporium oryzae lesions collected under direct natural sunlight.'
+              },
+              {
+                image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=2065&auto=format&fit=crop',
+                title: 'Multi-Spectral Feature Extraction',
+                description: 'Feature maps generated across intermediate convolutional blocks isolating leaf venation from necrosis.'
+              },
+              {
+                image: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&q=80&w=2070',
+                title: 'VGG19 Deep Feature Space',
+                description: 'Dense 16-convolutional layer pipeline feeding fully connected classification layers with softmax output.'
+              }
+            ]}
+          />
+        </div>
+
+        {/* Peer-Reviewed Publications & Symposia */}
+        <div className="mb-28">
+          <div className="mb-12">
+            <div className="inline-flex items-center gap-2 text-xs font-mono font-bold tracking-widest text-brand-orange uppercase mb-2">
+              <BookOpen size={14} />
+              <span>ACADEMIC DISSEMINATION</span>
+            </div>
+            <h2 className="font-display font-bold text-3xl sm:text-4xl text-white uppercase tracking-tight">
+              Publications & Symposium Proceedings
+            </h2>
+            <p className="font-sans text-slate-400 text-sm sm:text-base mt-2 font-light">
+              Peer-reviewed papers and conference presentations validating this methodology.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            {researchData.publications.map((pub, idx) => (
+              <div
+                key={idx}
+                className="bg-slate-900/80 rounded-3xl p-8 border border-white/10 hover:border-brand-orange/40 transition-all flex flex-col justify-between group"
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="px-3 py-1 rounded-full bg-brand-orange/15 text-brand-orange text-xs font-mono font-bold border border-brand-orange/30">
+                      {pub.type}
+                    </span>
+                    <span className="text-xs font-mono text-slate-400">
+                      {pub.date}
+                    </span>
+                  </div>
+
+                  <h3 className="font-display font-bold text-2xl text-white mb-3 group-hover:text-brand-orange transition-colors">
+                    {pub.title}
+                  </h3>
+
+                  <div className="text-sm font-sans font-bold text-slate-300 mb-1">
+                    {pub.venue}
+                  </div>
+                  <div className="text-xs font-mono text-slate-400 mb-6">
+                    {pub.institution}
+                  </div>
+                </div>
+
+                <div className="pt-6 border-t border-white/10 flex items-center justify-between">
+                  <a
+                    href={pub.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-xs font-mono font-bold text-brand-orange hover:text-white transition-colors"
+                  >
+                    <span>SEARCH SCHOLAR RECORD</span>
+                    <ExternalLink size={13} />
+                  </a>
+                  <span className="text-xs font-mono text-slate-500">PEER REVIEWED</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Return Button CTA */}
+        <div className="text-center pb-24">
+          <button
+            onClick={navigateToMain}
+            className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-brand-orange hover:bg-orange-600 text-white font-sans font-bold text-base shadow-xl shadow-brand-orange/20 transition-all hover:scale-105"
+          >
+            <ArrowLeft size={18} />
+            <span>Back to Full Engineering Portfolio</span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  );
 };
 
 export default ResearchView;
