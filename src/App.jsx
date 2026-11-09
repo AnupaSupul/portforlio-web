@@ -74,25 +74,20 @@ const App = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 font-sans text-slate-300 selection:bg-cyan-500 selection:text-white overflow-x-hidden">
+    <div className="min-h-screen bg-slate-950 font-sans text-slate-300 selection:bg-brand-orange selection:text-white overflow-x-hidden">
 
-      {/* Navigation */}
+      {/* Sticky Navigation (Visible when scrolled past hero) */}
       <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled
-        ? 'bg-slate-950/80 backdrop-blur-xl shadow-lg shadow-cyan-900/10 py-3 md:py-4 border-b border-white/5 supports-[backdrop-filter]:bg-slate-950/60'
-        : 'bg-transparent py-4 md:py-6'
+        ? 'opacity-100 translate-y-0 bg-slate-950/90 backdrop-blur-xl shadow-xl shadow-black/40 py-3 md:py-4 border-b border-white/10'
+        : 'opacity-0 -translate-y-full pointer-events-none py-4'
         }`}>
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
           <div
             className="flex items-center gap-3 cursor-pointer z-50 group"
             onClick={() => handleNavigation('home')}
           >
-            <div className="relative w-10 h-10 rounded-full overflow-hidden border-2 border-slate-700 group-hover:border-cyan-500 transition-colors">
-              {/* Navbar Profile Photo Placeholder */}
-              <img
-                src="/profile.jpeg"
-                alt="Profile"
-                className="w-full h-full object-cover"
-              />
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-orange to-orange-600 flex items-center justify-center font-display font-black text-xl text-white shadow-md shadow-orange-900/40 group-hover:scale-105 transition-transform">
+              A
             </div>
             <div className="text-xl font-bold text-slate-100 tracking-tight">
               Anupa Supul
@@ -114,69 +109,79 @@ const App = () => {
           <div className="md:hidden z-50">
             <button
               onClick={() => setMobileMenuOpen(true)}
-              className="p-2 text-slate-300 hover:text-white"
+              className="p-2 text-slate-300 hover:text-brand-orange"
             >
               <Menu size={24} />
             </button>
           </div>
         </div>
-
-        {/* Mobile Nav Overlay */}
-        {mobileMenuOpen && (
-          <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-slate-950/98 backdrop-blur-xl animate-fade-in md:hidden">
-            {/* Close Button */}
-            <button
-              onClick={() => setMobileMenuOpen(false)}
-              className="absolute top-6 right-6 p-2 rounded-full bg-slate-800/50 text-slate-400 hover:text-white hover:bg-slate-800 transition-all border border-white/5"
-            >
-              <X size={28} />
-            </button>
-
-            {/* Nav Links with Staggered Animation */}
-            <div className="flex flex-col items-center space-y-8 mb-12">
-              {[
-                { id: 'home', label: 'Home' },
-                { id: 'about', label: 'About' },
-                { id: 'skills', label: 'Skills' },
-                { id: 'certifications', label: 'Certifications' },
-                { id: 'projects', label: 'Projects' },
-                { id: 'research-page', label: 'Research Lab', special: true },
-                { id: 'contact', label: 'Contact' }
-              ].map((item, index) => (
-                <button
-                  key={item.id}
-                  onClick={() => handleNavigation(item.id)}
-                  className={`text-4xl font-bold tracking-tight transition-all duration-300 transform
-                    ${item.special
-                      ? 'text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 hover:scale-105'
-                      : 'text-slate-300 hover:text-white hover:scale-105'}
-                    animate-fade-in-up`}
-                  style={{ animationDelay: `${index * 100}ms` }}
-                >
-                  {item.label}
-                </button>
-              ))}
-            </div>
-
-            {/* Social Links Footer */}
-            <div className="flex items-center gap-6 mt-8 animate-fade-in" style={{ animationDelay: '600ms' }}>
-              <a href="https://github.com/AnupaSupul" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-slate-900 border border-slate-700 text-slate-400 hover:text-white hover:border-cyan-500 transition-all">
-                <Github size={24} />
-              </a>
-              <a href="https://www.linkedin.com/in/anupa-supul-a511822ab/" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-slate-900 border border-slate-700 text-slate-400 hover:text-blue-400 hover:border-blue-500 transition-all">
-                <Linkedin size={24} />
-              </a>
-            </div>
-
-            {/* Decoration */}
-            <div className="absolute bottom-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent"></div>
-          </div>
-        )}
       </nav>
+
+      {/* Mobile Nav Overlay (Accessible from both Hero and Sticky Nav) */}
+      {mobileMenuOpen && (
+        <div className="fixed inset-0 z-[60] flex flex-col items-center justify-center bg-slate-950/98 backdrop-blur-2xl animate-fade-in">
+          {/* Close Button */}
+          <button
+            onClick={() => setMobileMenuOpen(false)}
+            className="absolute top-6 right-6 p-2 rounded-full bg-slate-900 text-slate-400 hover:text-white hover:bg-brand-orange/20 hover:border-brand-orange/40 transition-all border border-white/10"
+            aria-label="Close menu"
+          >
+            <X size={28} />
+          </button>
+
+          {/* Nav Links */}
+          <div className="flex flex-col items-center space-y-7 mb-10">
+            {[
+              { id: 'home', label: 'Home' },
+              { id: 'about', label: 'About' },
+              { id: 'skills', label: 'Tech Stack' },
+              { id: 'certifications', label: 'Certifications' },
+              { id: 'projects', label: 'Projects' },
+              { id: 'research-page', label: 'Research Lab', special: true },
+              { id: 'contact', label: 'Contact' }
+            ].map((item, index) => (
+              <button
+                key={item.id}
+                onClick={() => handleNavigation(item.id)}
+                className={`text-3xl sm:text-4xl font-bold tracking-tight transition-all duration-300 transform
+                  ${item.special
+                    ? 'text-brand-orange hover:scale-105'
+                    : 'text-slate-300 hover:text-white hover:scale-105'}`}
+              >
+                {item.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Social Links Footer */}
+          <div className="flex items-center gap-5 mt-4">
+            <a href="https://github.com/AnupaSupul" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-slate-900 border border-slate-700 text-slate-300 hover:text-brand-orange hover:border-brand-orange transition-all" title="GitHub">
+              <Github size={22} />
+            </a>
+            <a href="https://www.linkedin.com/in/anupa-supul-a511822ab/" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-slate-900 border border-slate-700 text-slate-300 hover:text-brand-orange hover:border-brand-orange transition-all" title="LinkedIn">
+              <Linkedin size={22} />
+            </a>
+            <a href="mailto:supulanupa@gmail.com" className="p-3 rounded-full bg-slate-900 border border-slate-700 text-slate-300 hover:text-brand-orange hover:border-brand-orange transition-all" title="Email">
+              <Mail size={22} />
+            </a>
+            <a href="/cv/AnupaSupulCV.pdf" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-slate-900 border border-slate-700 text-slate-300 hover:text-brand-orange hover:border-brand-orange transition-all" title="CV (PDF)">
+              <FileText size={22} />
+            </a>
+          </div>
+
+          {/* Brand Accent Line */}
+          <div className="absolute bottom-0 w-full h-1 bg-gradient-to-r from-transparent via-brand-orange/40 to-transparent"></div>
+        </div>
+      )}
 
       {/* VIEW SWITCHER */}
       {currentView === 'main' ? (
-        <MainView scrollTo={handleNavigation} navigateToResearch={() => handleNavigation('research-page')} />
+        <MainView
+          scrollTo={handleNavigation}
+          navigateToResearch={() => handleNavigation('research-page')}
+          activeSection={activeSection}
+          onOpenMobileMenu={() => setMobileMenuOpen(true)}
+        />
       ) : (
         <ResearchView />
       )}

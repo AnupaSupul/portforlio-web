@@ -21,9 +21,10 @@ import {
     Award
 } from 'lucide-react';
 import ProjectModal from './ProjectModal';
+import SplitHero from './hero/SplitHero';
 
 // 1. Main Portfolio View 
-const MainView = ({ scrollTo, navigateToResearch }) => {
+const MainView = ({ scrollTo, navigateToResearch, activeSection = 'home', onOpenMobileMenu }) => {
     const [filter, setFilter] = useState('all');
     const [selectedProject, setSelectedProject] = useState(null);
     const aboutSectionRef = useRef(null);
@@ -256,153 +257,8 @@ const MainView = ({ scrollTo, navigateToResearch }) => {
                 <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
             )}
 
-            {/* HERO SECTION */}
-            <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20 bg-slate-950">
-
-                {/* Advanced Dynamic Background */}
-                <div className="absolute inset-0">
-                    <div className="absolute inset-0 bg-grid-pattern opacity-30 animate-pulse"></div>
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(6,182,212,0.1),transparent_60%)] animate-pulse-slow"></div>
-
-                    {/* Floating Tech Particles */}
-                    {particles.map((p) => (
-                        <div
-                            key={p.id}
-                            className="absolute text-slate-800 opacity-20 animate-float-slow"
-                            style={{
-                                top: `${p.top}%`,
-                                left: `${p.left}%`,
-                                animationDelay: `${p.delay}s`,
-                                animationDuration: `${p.duration}s`
-                            }}
-                        >
-                            <p.icon size={32} />
-                        </div>
-                    ))}
-                </div>
-
-                <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center relative z-10">
-
-                    {/* Text Content */}
-                    <div className="space-y-8 animate-fade-in-up relative">
-                        {/* Decorative Background Blur behind text */}
-                        <div className="absolute -left-20 -top-20 w-96 h-96 bg-cyan-500/10 rounded-full blur-[100px] pointer-events-none"></div>
-
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900/80 border border-cyan-500/30 text-cyan-400 text-sm font-mono shadow-[0_0_15px_rgba(6,182,212,0.3)]">
-                            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
-                            FULL-STACK & RESEARCH
-                        </div>
-
-                        <h1 className="text-6xl md:text-8xl font-extrabold text-white leading-[1.05] tracking-tight">
-                            I am <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 animate-gradient-x">
-                                Anupa Supul
-                            </span>
-                        </h1>
-
-                        <p className="text-xl md:text-2xl text-slate-400 leading-relaxed max-w-xl border-l-2 border-slate-800 pl-6 relative">
-                            <span className="absolute top-0 left-0 w-0.5 h-full bg-gradient-to-b from-cyan-500 to-transparent"></span>
-                            A <strong>Computer Science Undergraduate</strong> at the University of Ruhuna.
-                            I am a <span className="text-slate-200 font-semibold">full-stack–leaning developer</span> focused on building real-world systems, not just academic demos.
-                        </p>
-
-                        <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                            <a href="/cv/Anupa-Supul-CV.pdf" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-cyan-500 text-black font-bold hover:bg-cyan-400 hover:scale-105 transition-all duration-300">
-                                <FileText size={20} />
-                                View Resume
-                            </a>
-                            <a href="/cv/Anupa-Supul-CV.pdf" download="Anupa-Supul-CV.pdf" className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white font-bold hover:bg-slate-800 hover:border-cyan-500 hover:scale-105 transition-all duration-300">
-                                <Download size={20} />
-                                Download CV
-                            </a>
-                            <div className="flex items-center gap-4 text-slate-500 ml-0 sm:ml-4 justify-center sm:justify-start">
-                                <Code size={24} className="animate-float-slow" />
-                                <Database size={24} className="animate-float-slow animation-delay-2000" />
-                                <Server size={24} className="animate-float-slow animation-delay-4000" />
-                                <GitBranch size={24} className="animate-float-slow" />
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Visual Element: Profile Photo Container */}
-                    <div className="relative flex items-center justify-center h-96 lg:h-[600px] w-full lg:w-auto perspective-1000">
-                        {/* Orbiting Skill Nodes Wrapper */}
-                        <div className="absolute inset-0 flex items-center justify-center animate-orbit-parent">
-                            {skillNodes.map((skill, index) => {
-                                // Calculate responsive radius based on smaller of width/height
-                                const radius = 'min(15rem, 40vw)'; // Using min for responsive radius
-                                const angle = index * (2 * Math.PI / skillNodes.length);
-                                return (
-                                    <div
-                                        key={skill.name}
-                                        className={`absolute w-10 h-10 rounded-full border border-${skill.color}-500/50 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center text-${skill.color}-400 opacity-60 hover:opacity-100 transition-all duration-300 cursor-pointer group animate-orbit-float`}
-                                        style={{
-                                            top: `calc(50% + ${radius} * ${Math.sin(angle)} - 20px)`,
-                                            left: `calc(50% + ${radius} * ${Math.cos(angle)} - 20px)`,
-                                            animationDelay: `${index * 0.3}s`,
-                                            animationDuration: `${7 + (index * 0.5)}s`,
-                                            animationDirection: index % 2 === 0 ? 'normal' : 'reverse',
-                                        }}
-                                    >
-                                        <skill.icon size={18} />
-                                        {/* Skill Name on Hover */}
-                                        <div className={`absolute -top-8 px-2 py-1 bg-slate-800/80 backdrop-blur-sm text-xs rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none text-${skill.color}-300`}>
-                                            {skill.name}
-                                        </div>
-                                    </div>
-                                );
-                            })}
-                        </div>
-
-                        <div className="relative w-64 h-80 sm:w-80 sm:h-96 group transition-all duration-500 hover:rotate-y-12 preserve-3d">
-
-                            {/* Rotating Rings */}
-                            <div className="absolute -inset-10 border border-dashed border-cyan-500/20 rounded-full animate-spin-slow pointer-events-none"></div>
-                            <div className="absolute -inset-20 border border-dotted border-purple-500/20 rounded-full animate-spin-reverse-slow pointer-events-none"></div>
-
-                            {/* Glow Behind */}
-                            <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/30 to-purple-600/30 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-
-                            {/* Main Frame */}
-                            <div className="absolute inset-0 bg-slate-900 rounded-2xl border border-white/10 overflow-hidden shadow-2xl">
-                                {/* Placeholder for Profile Photo */}
-                                <img
-                                    src="/profile.jpeg"
-                                    alt="Anupa Supul"
-                                    className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
-                                />
-
-                                {/* Scanning Line Effect */}
-                                <div className="absolute top-0 left-0 w-full h-1 bg-cyan-500/50 shadow-[0_0_20px_rgba(6,182,212,0.8)] animate-scan pointer-events-none"></div>
-
-                                {/* Tech Badge Overlay */}
-                                <div className="absolute bottom-4 left-4 right-4 p-3 bg-slate-950/90 backdrop-blur-xl rounded-xl border border-white/10 flex items-center gap-3 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                                    <div className="p-2 bg-cyan-500/20 rounded-lg text-cyan-400 relative overflow-hidden">
-                                        <div className="absolute inset-0 bg-cyan-400/20 animate-pulse"></div>
-                                        <Code size={18} className="relative z-10" />
-                                    </div>
-                                    <div>
-                                        <div className="text-[10px] text-cyan-400 font-mono uppercase tracking-widest">System_ID</div>
-                                        <div className="text-sm font-bold text-white">Anupa.Dev</div>
-                                    </div>
-                                    <div className="ml-auto flex gap-1">
-                                        <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></div>
-                                        <div className="w-1.5 h-1.5 bg-slate-700 rounded-full"></div>
-                                    </div>
-                                </div>
-
-                                {/* Corner Decorations */}
-                                <div className="absolute top-4 left-4 w-8 h-8 border-t-2 border-l-2 border-cyan-500/50 rounded-tl-lg"></div>
-                                <div className="absolute bottom-4 right-4 w-8 h-8 border-b-2 border-r-2 border-cyan-500/50 rounded-br-lg"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce text-slate-500 cursor-pointer hover:text-cyan-400 transition-colors" onClick={() => scrollTo('about')}>
-                    <ChevronDown size={28} />
-                </div>
-            </section>
+            {/* APPROVED SPLIT-SCREEN CREATIVE HERO */}
+            <SplitHero scrollTo={scrollTo} activeSection={activeSection} onOpenMobileMenu={onOpenMobileMenu} />
 
             {/* ABOUT SECTION (REDESIGNED) */}
             <section id="about" ref={aboutSectionRef} className="py-32 bg-slate-950 relative overflow-hidden">
