@@ -143,12 +143,12 @@ const EducationSection = () => {
 
                 <div className="flex items-center justify-between text-sm font-sans pb-2 border-b border-orange-100">
                   <span className="text-slate-800 font-medium">Physics</span>
-                  <span className="font-mono font-black text-slate-900 text-lg">C</span>
+                  <span className="font-mono font-black text-slate-900 text-lg">B</span>
                 </div>
 
                 <div className="flex items-center justify-between text-xs font-mono pt-1 text-slate-700">
                   <span className="font-bold">National Z-Score:</span>
-                  <span className="font-black text-brand-orange text-base">1.4847</span>
+                  <span className="font-black text-brand-orange text-base">1.4948</span>
                 </div>
               </div>
             </div>
