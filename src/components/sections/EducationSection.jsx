@@ -35,44 +35,44 @@ const EducationSection = () => {
   }, []);
 
   return (
-    <section id="education" ref={sectionRef} className="py-28 lg:py-36 bg-[#FFFFFF] text-slate-900 relative overflow-hidden border-t-2 border-orange-200">
+    <section id="education" ref={sectionRef} className="py-20 lg:py-36 bg-[#FFFFFF] text-slate-900 relative overflow-hidden border-t-2 border-orange-200">
       {/* Radiant ambient orange lighting */}
       <div className="absolute top-1/2 right-10 w-[700px] h-[500px] bg-brand-orange/10 rounded-full blur-[180px] pointer-events-none" />
       <div className="absolute inset-0 bg-[radial-gradient(#fed7aa_1px,transparent_1px)] [background-size:24px_24px] opacity-40 pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-10 relative z-10">
 
         {/* Section Header */}
-        <div className="max-w-3xl mb-16">
+        <div className="max-w-3xl mb-12 sm:mb-16">
           <div className="flex items-center gap-2 mb-3">
             <span className="w-2 h-6 bg-brand-orange rounded-full" />
             <span className="text-xs font-mono font-bold tracking-widest text-brand-orange uppercase">
               06 / EDUCATION
             </span>
           </div>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.08] font-sans">
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.08] font-sans">
             Academic Foundation & <br />
             <span className="text-brand-orange">Scientific Rigor</span>
           </h2>
-          <p className="text-base sm:text-lg text-slate-700 font-sans mt-4 font-normal leading-relaxed">
+          <p className="text-sm sm:text-lg text-slate-700 font-sans mt-3 sm:mt-4 font-normal leading-relaxed">
             Theoretical computer science foundations and physical science mathematics forming the analytical core of my engineering approach.
           </p>
         </div>
 
         {/* 2-Column Academic Composition */}
-        <div className="grid lg:grid-cols-12 gap-8 items-stretch">
+        <div className="grid lg:grid-cols-12 gap-6 sm:gap-8 items-stretch">
 
           {/* CARD 1: University of Ruhuna (Col span 7) */}
           <div className="lg:col-span-7 edu-card-stagger">
             <TiltCard maxTilt={4} className="h-full">
-              <div className="bg-[#FAF8F5] rounded-3xl p-8 sm:p-12 border-2 border-orange-200 hover:border-brand-orange shadow-md hover:shadow-xl transition-all duration-300 card-hover-lift flex flex-col justify-between relative overflow-hidden group h-full">
+              <div className="bg-[#FAF8F5] rounded-3xl p-4 sm:p-12 border-2 border-orange-200 hover:border-brand-orange shadow-md hover:shadow-xl transition-all duration-300 card-hover-lift flex flex-col justify-between relative overflow-hidden group h-full">
                 <div className="border-beam-glow" />
                 {/* Ambient orange glow */}
                 <div className="absolute top-0 right-0 w-80 h-80 bg-brand-orange/10 rounded-full blur-3xl pointer-events-none" />
 
                 <div>
                   <div className="flex flex-wrap items-center justify-between gap-2 mb-6">
-                    <span className="px-3.5 py-1 rounded-full bg-brand-orange text-white text-xs font-mono font-bold uppercase shadow-sm shadow-brand-orange/30">
+                    <span className="px-3.5 py-1 rounded-full bg-brand-orange text-white text-[10px] sm:text-xs font-mono font-bold uppercase shadow-sm shadow-brand-orange/30">
                       Undergraduate Degree
                     </span>
                     <span className="text-xs font-mono text-brand-orange font-bold">
@@ -80,15 +80,15 @@ const EducationSection = () => {
                     </span>
                   </div>
 
-                  <div className="flex items-start gap-4 mb-6">
-                    <div className="w-14 h-14 rounded-2xl bg-brand-orange text-white flex items-center justify-center shadow-lg shadow-brand-orange/40 shrink-0 group-hover:scale-105 transition-transform">
-                      <GraduationCap size={28} />
+                  <div className="flex items-start gap-3 sm:gap-4 mb-6">
+                    <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-brand-orange text-white flex items-center justify-center shadow-lg shadow-brand-orange/40 shrink-0 group-hover:scale-105 transition-transform">
+                      <GraduationCap size={24} />
                     </div>
                     <div>
-                      <h3 className="text-2xl sm:text-3xl font-black text-slate-900 font-sans tracking-tight leading-tight">
+                      <h3 className="text-xl sm:text-3xl font-black text-slate-900 font-sans tracking-tight leading-tight">
                         Bachelor of Computer Science
                       </h3>
-                      <div className="text-base font-bold text-brand-orange font-sans mt-1">
+                      <div className="text-sm sm:text-base font-bold text-brand-orange font-sans mt-1">
                         University of Ruhuna, Sri Lanka
                       </div>
                       <p className="text-xs text-slate-500 font-mono mt-0.5">
@@ -132,11 +132,11 @@ const EducationSection = () => {
           {/* CARD 2: St. Thomas' Boys' College Matara (Col span 5) */}
           <div className="lg:col-span-5 edu-card-stagger">
             <TiltCard maxTilt={4} className="h-full">
-              <div className="bg-[#FAF8F5] rounded-3xl p-8 sm:p-10 border-2 border-orange-200 hover:border-brand-orange shadow-md hover:shadow-xl transition-all duration-300 card-hover-lift flex flex-col justify-between relative overflow-hidden group h-full">
+              <div className="bg-[#FAF8F5] rounded-3xl p-4 sm:p-10 border-2 border-orange-200 hover:border-brand-orange shadow-md hover:shadow-xl transition-all duration-300 card-hover-lift flex flex-col justify-between relative overflow-hidden group h-full">
                 <div className="border-beam-glow" />
                 <div>
                   <div className="flex items-center justify-between mb-6">
-                    <span className="px-3.5 py-1 rounded-full bg-orange-100 text-brand-orange text-xs font-mono font-bold uppercase">
+                    <span className="px-3.5 py-1 rounded-full bg-orange-100 text-brand-orange text-[10px] sm:text-xs font-mono font-bold uppercase">
                       Advanced Level Examination
                     </span>
                     <span className="text-xs font-mono text-slate-500 font-semibold">
@@ -144,15 +144,15 @@ const EducationSection = () => {
                     </span>
                   </div>
 
-                  <div className="flex items-start gap-4 mb-6">
-                    <div className="w-14 h-14 rounded-2xl bg-orange-500 text-white flex items-center justify-center shadow-lg shadow-brand-orange/40 shrink-0 group-hover:scale-105 transition-transform">
-                      <Bookmark size={26} />
+                  <div className="flex items-start gap-3 sm:gap-4 mb-6">
+                    <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-orange-500 text-white flex items-center justify-center shadow-lg shadow-brand-orange/40 shrink-0 group-hover:scale-105 transition-transform">
+                      <Bookmark size={24} />
                     </div>
                     <div>
-                      <h3 className="text-xl sm:text-2xl font-black text-slate-900 font-sans tracking-tight leading-tight">
+                      <h3 className="text-lg sm:text-2xl font-black text-slate-900 font-sans tracking-tight leading-tight">
                         G.C.E. Advanced Level
                       </h3>
-                      <div className="text-sm font-bold text-slate-800 font-sans mt-0.5">
+                      <div className="text-xs sm:text-sm font-bold text-slate-800 font-sans mt-0.5">
                         St. Thomas' Boys' College, Matara
                       </div>
                       <p className="text-xs text-brand-orange font-mono font-bold mt-0.5">
@@ -166,34 +166,34 @@ const EducationSection = () => {
                   </p>
 
                   {/* Verified Examination Results */}
-                  <div className="bg-white rounded-2xl p-5 border-2 border-orange-200 shadow-sm space-y-3 mb-6">
+                  <div className="bg-white rounded-2xl p-3.5 sm:p-5 border-2 border-orange-200 shadow-sm space-y-2.5 sm:space-y-3 mb-6">
                     <span className="text-[10px] font-mono text-brand-orange uppercase font-bold tracking-wider block mb-1">
                       OFFICIAL EXAMINATION RECORD
                     </span>
 
-                    <div className="flex items-center justify-between text-sm font-sans pb-2 border-b border-orange-100">
+                    <div className="flex items-center justify-between text-xs sm:text-sm font-sans pb-2 border-b border-orange-100">
                       <span className="text-slate-800 font-medium">Combined Mathematics</span>
-                      <span className="font-mono font-black text-brand-orange text-lg">A</span>
+                      <span className="font-mono font-black text-brand-orange text-base sm:text-lg">A</span>
                     </div>
 
-                    <div className="flex items-center justify-between text-sm font-sans pb-2 border-b border-orange-100">
+                    <div className="flex items-center justify-between text-xs sm:text-sm font-sans pb-2 border-b border-orange-100">
                       <span className="text-slate-800 font-medium">Chemistry</span>
-                      <span className="font-mono font-black text-brand-orange text-lg">B</span>
+                      <span className="font-mono font-black text-brand-orange text-base sm:text-lg">B</span>
                     </div>
 
-                    <div className="flex items-center justify-between text-sm font-sans pb-2 border-b border-orange-100">
+                    <div className="flex items-center justify-between text-xs sm:text-sm font-sans pb-2 border-b border-orange-100">
                       <span className="text-slate-800 font-medium">Physics</span>
-                      <span className="font-mono font-black text-slate-700 text-lg">B</span>
+                      <span className="font-mono font-black text-slate-700 text-base sm:text-lg">B</span>
                     </div>
 
-                    <div className="flex items-center justify-between text-xs font-mono pt-1 text-slate-600">
+                    <div className="flex items-center justify-between text-[11px] sm:text-xs font-mono pt-1 text-slate-600">
                       <span>District Rank / Z-Score</span>
                       <span className="font-bold text-brand-orange">Z-Score: 1.4948</span>
                     </div>
                   </div>
                 </div>
 
-                <div className="pt-6 border-t border-orange-200 flex items-center justify-between text-xs font-mono text-slate-600">
+                <div className="pt-4 sm:pt-6 border-t border-orange-200 flex items-center justify-between text-[11px] sm:text-xs font-mono text-slate-600">
                   <span>COLOMBO / MATARA</span>
                   <span className="text-brand-orange font-bold">PHYSICAL SCIENCE</span>
                 </div>

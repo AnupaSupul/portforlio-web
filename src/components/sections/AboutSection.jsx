@@ -57,12 +57,12 @@ const AboutSection = () => {
   }, []);
 
   return (
-    <section id="about" ref={sectionRef} className="py-28 lg:py-36 bg-[#FAF8F5] text-slate-900 relative overflow-hidden">
+    <section id="about" ref={sectionRef} className="py-20 lg:py-36 bg-[#FAF8F5] text-slate-900 relative overflow-hidden">
       {/* Warm ambient orange radial glows */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] rounded-full bg-brand-orange/10 blur-[180px] pointer-events-none" />
       <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:24px_24px] opacity-40 pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-10 relative z-10">
 
         {/* Section Tag */}
         <div className="flex items-center gap-2 mb-4">
@@ -73,9 +73,9 @@ const AboutSection = () => {
         </div>
 
         {/* Top Editorial Row with Masked Split-Text Reveal */}
-        <div ref={headlineRef} className="grid lg:grid-cols-12 gap-8 items-end mb-14">
+        <div ref={headlineRef} className="grid lg:grid-cols-12 gap-6 sm:gap-8 items-end mb-10 sm:mb-14">
           <div className="lg:col-span-7">
-            <h2 className="text-4xl sm:text-6xl lg:text-7xl font-black text-slate-900 tracking-tight leading-[1.04] font-sans">
+            <h2 className="text-3xl sm:text-6xl lg:text-7xl font-black text-slate-900 tracking-tight leading-[1.04] font-sans">
               <span className="block overflow-hidden">
                 <span className="about-reveal-line block">Beyond</span>
               </span>
@@ -85,19 +85,19 @@ const AboutSection = () => {
             </h2>
           </div>
           <div className="lg:col-span-5">
-            <p className="text-base sm:text-lg text-slate-700 font-sans leading-relaxed font-normal">
+            <p className="text-sm sm:text-lg text-slate-700 font-sans leading-relaxed font-normal">
               Computer Science undergraduate at the <strong className="text-brand-orange font-bold">University of Ruhuna</strong>, operating across robust full-stack engineering, cloud architectures, and practical machine learning research.
             </p>
           </div>
         </div>
 
         {/* 3-Column Studio Showcase */}
-        <div className="grid lg:grid-cols-12 gap-8 items-stretch">
+        <div className="grid lg:grid-cols-12 gap-6 sm:gap-8 items-stretch">
 
           {/* LEFT: Contextual Credentials (Col span 3) */}
           <div className="lg:col-span-3 flex flex-col justify-between gap-4">
             <TiltCard maxTilt={5} className="h-full">
-              <div className="bg-white rounded-3xl p-6 border-2 border-orange-200/80 shadow-md card-hover-lift relative overflow-hidden group flex flex-col justify-between h-full">
+              <div className="bg-white rounded-3xl p-4 sm:p-6 border-2 border-orange-200/80 shadow-md card-hover-lift relative overflow-hidden group flex flex-col justify-between h-full">
                 <div className="border-beam-glow" />
                 <div>
                   <span className="text-[11px] font-mono text-brand-orange font-bold uppercase tracking-wider block mb-4">
@@ -156,7 +156,7 @@ const AboutSection = () => {
           {/* CENTER: Rich Burnt-Orange and Bright-Orange Architecture Canvas (Col span 6) */}
           <div
             ref={canvasRef}
-            className="lg:col-span-6 bg-gradient-to-br from-[#240B02] via-[#3B1304] to-[#1A0701] rounded-3xl p-6 sm:p-8 border-2 border-brand-orange text-white shadow-2xl flex flex-col justify-between relative overflow-hidden group/canvas"
+            className="lg:col-span-6 bg-gradient-to-br from-[#240B02] via-[#3B1304] to-[#1A0701] rounded-3xl p-4 sm:p-8 border-2 border-brand-orange text-white shadow-2xl flex flex-col justify-between relative overflow-hidden group/canvas"
           >
             {/* Glowing inner orange ambiance with gentle pulse */}
             <div className="absolute top-0 right-0 w-80 h-80 bg-brand-orange/25 rounded-full blur-3xl pointer-events-none animate-pulse-slow" />
@@ -175,16 +175,16 @@ const AboutSection = () => {
             </svg>
 
             {/* Canvas Header Bar */}
-            <div className="flex items-center justify-between pb-4 border-b border-orange-500/30 mb-6 relative z-10">
+            <div className="flex flex-wrap items-center justify-between gap-2 pb-3 sm:pb-4 border-b border-orange-500/30 mb-4 sm:mb-6 relative z-10">
               <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full bg-brand-orange animate-ping-slow" />
-                <span className="ml-2 text-xs font-mono font-bold text-orange-200">
+                <div className="w-2.5 h-2.5 rounded-full bg-brand-orange animate-ping-slow" />
+                <span className="text-[11px] sm:text-xs font-mono font-bold text-orange-200 truncate">
                   {activeDimension === 'builder' ? 'fullstack-architecture.manifest' : 'neural-vision.pipeline'}
                 </span>
               </div>
-              <span className="px-3 py-1 rounded-full bg-brand-orange text-white text-[10px] font-mono font-black uppercase shadow-md shadow-brand-orange/40 flex items-center gap-1.5">
+              <span className="px-2.5 sm:px-3 py-1 rounded-full bg-brand-orange text-white text-[9px] sm:text-[10px] font-mono font-black uppercase shadow-md shadow-brand-orange/40 flex items-center gap-1.5">
                 <Sparkles size={11} />
-                <span>{activeDimension === 'builder' ? 'Full-Stack Distributed System' : 'Deep Learning Vision Pipeline'}</span>
+                <span>{activeDimension === 'builder' ? 'Full-Stack Architecture' : 'Vision Pipeline'}</span>
               </span>
             </div>
 
@@ -344,9 +344,9 @@ const AboutSection = () => {
             <TiltCard maxTilt={6} className="flex-1">
               <div
                 onClick={() => setActiveDimension('builder')}
-                className={`cursor-pointer rounded-3xl p-6 border-2 transition-all duration-300 flex flex-col justify-between h-full card-hover-lift relative overflow-hidden ${
+                className={`cursor-pointer rounded-3xl p-4 sm:p-6 border-2 transition-all duration-300 flex flex-col justify-between h-full card-hover-lift relative overflow-hidden ${
                   activeDimension === 'builder'
-                    ? 'bg-white border-brand-orange shadow-xl ring-4 ring-brand-orange/20 scale-[1.02]'
+                    ? 'bg-white border-brand-orange shadow-xl ring-4 ring-brand-orange/20 scale-[1.01]'
                     : 'bg-white/90 border-orange-200 hover:border-brand-orange hover:bg-white'
                 }`}
               >
@@ -397,9 +397,9 @@ const AboutSection = () => {
             <TiltCard maxTilt={6} className="flex-1">
               <div
                 onClick={() => setActiveDimension('researcher')}
-                className={`cursor-pointer rounded-3xl p-6 border-2 transition-all duration-300 flex flex-col justify-between h-full card-hover-lift relative overflow-hidden ${
+                className={`cursor-pointer rounded-3xl p-4 sm:p-6 border-2 transition-all duration-300 flex flex-col justify-between h-full card-hover-lift relative overflow-hidden ${
                   activeDimension === 'researcher'
-                    ? 'bg-white border-brand-orange shadow-xl ring-4 ring-brand-orange/20 scale-[1.02]'
+                    ? 'bg-white border-brand-orange shadow-xl ring-4 ring-brand-orange/20 scale-[1.01]'
                     : 'bg-white/90 border-orange-200 hover:border-brand-orange hover:bg-white'
                 }`}
               >

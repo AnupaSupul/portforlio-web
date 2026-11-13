@@ -40,45 +40,45 @@ const CertificationsSection = () => {
   }, []);
 
   return (
-    <section id="certifications" ref={sectionRef} className="py-28 lg:py-36 bg-[#FAF8F5] text-slate-900 relative overflow-hidden border-t-2 border-orange-200">
+    <section id="certifications" ref={sectionRef} className="py-20 lg:py-36 bg-[#FAF8F5] text-slate-900 relative overflow-hidden border-t-2 border-orange-200">
       {/* Radiant ambient orange lighting */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[550px] bg-brand-orange/10 rounded-full blur-[180px] pointer-events-none" />
       <div className="absolute inset-0 bg-[radial-gradient(#fed7aa_1px,transparent_1px)] [background-size:24px_24px] opacity-40 pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-10 relative z-10">
 
         {/* Section Header */}
-        <div className="max-w-3xl mb-16">
+        <div className="max-w-3xl mb-12 sm:mb-16">
           <div className="flex items-center gap-2 mb-3">
             <span className="w-2 h-6 bg-brand-orange rounded-full" />
             <span className="text-xs font-mono font-bold tracking-widest text-brand-orange uppercase">
               07 / CERTIFICATIONS
             </span>
           </div>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.08] font-sans">
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.08] font-sans">
             AWS Cloud <br />
             <span className="text-brand-orange">Certifications</span>
           </h2>
-          <p className="text-base sm:text-lg text-slate-700 font-sans mt-4 font-normal leading-relaxed">
+          <p className="text-sm sm:text-lg text-slate-700 font-sans mt-3 sm:mt-4 font-normal leading-relaxed">
             Industry-recognized AWS accreditations validating core cloud architectures, compute, storage, networking, and cloud security best practices.
           </p>
         </div>
 
         {/* Curated Credential Gallery Grid with 3D Tilt */}
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
           {certs.map((cert, index) => {
             const pdfPath = `/certificates/${cert.pdf}`;
             return (
               <div key={index} className="cert-card-stagger">
                 <TiltCard maxTilt={5} className="h-full">
-                  <div className="group bg-white rounded-3xl p-8 border-2 border-orange-200 hover:border-brand-orange shadow-md hover:shadow-2xl transition-all duration-300 card-hover-lift flex flex-col justify-between relative overflow-hidden h-full">
+                  <div className="group bg-white rounded-3xl p-5 sm:p-8 border-2 border-orange-200 hover:border-brand-orange shadow-md hover:shadow-2xl transition-all duration-300 card-hover-lift flex flex-col justify-between relative overflow-hidden h-full">
                     <div className="border-beam-glow" />
                     {/* Top Orange Gradient Bar */}
                     <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-brand-orange via-amber-400 to-orange-600" />
 
                     <div>
                       {/* AWS Emblem Row */}
-                      <div className="flex items-center justify-between mb-8">
+                      <div className="flex items-center justify-between mb-6 sm:mb-8">
                         <div className="flex flex-col">
                           <span className="text-2xl font-black text-slate-900 tracking-tighter font-sans">
                             aws
@@ -97,17 +97,17 @@ const CertificationsSection = () => {
                         {cert.issuer}
                       </span>
 
-                      <h3 className="text-xl font-black text-slate-900 group-hover:text-brand-orange transition-colors font-sans mb-3 leading-tight">
+                      <h3 className="text-lg sm:text-xl font-black text-slate-900 group-hover:text-brand-orange transition-colors font-sans mb-3 leading-tight">
                         {cert.title}
                       </h3>
 
-                      <p className="text-xs sm:text-sm text-slate-600 font-sans leading-relaxed font-normal mb-8">
+                      <p className="text-xs sm:text-sm text-slate-600 font-sans leading-relaxed font-normal mb-6 sm:mb-8">
                         {cert.desc}
                       </p>
                     </div>
 
                     {/* Layered Actions: View PDF Modal & Direct Download */}
-                    <div className="pt-6 border-t border-orange-100 flex items-center gap-3">
+                    <div className="pt-4 sm:pt-6 border-t border-orange-100 flex items-center gap-3">
                       <MagneticButton
                         onClick={() => setActiveCertModal({ ...cert, url: pdfPath })}
                         className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-brand-orange hover:bg-orange-600 text-white text-xs font-sans font-bold transition-all shadow-md shadow-brand-orange/30 group-hover:shadow-lg"

@@ -55,75 +55,75 @@ const ExperienceSection = () => {
   }, []);
 
   return (
-    <section id="experience" ref={sectionRef} className="py-28 lg:py-36 bg-[#FAF8F5] text-slate-900 relative overflow-hidden border-t-2 border-orange-200">
+    <section id="experience" ref={sectionRef} className="py-20 lg:py-36 bg-[#FAF8F5] text-slate-900 relative overflow-hidden border-t-2 border-orange-200">
       {/* Radiant ambient orange lighting */}
       <div className="absolute top-1/2 left-10 w-[700px] h-[500px] bg-brand-orange/10 rounded-full blur-[180px] pointer-events-none" />
       <div className="absolute inset-0 bg-[radial-gradient(#fed7aa_1px,transparent_1px)] [background-size:24px_24px] opacity-40 pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-10 relative z-10">
 
         {/* Section Header */}
-        <div className="max-w-3xl mb-16">
+        <div className="max-w-3xl mb-12 sm:mb-16">
           <div className="flex items-center gap-2 mb-3">
             <span className="w-2 h-6 bg-brand-orange rounded-full" />
             <span className="text-xs font-mono font-bold tracking-widest text-brand-orange uppercase">
               05 / EXPERIENCE & LEADERSHIP
             </span>
           </div>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.08] font-sans">
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.08] font-sans">
             Engineering Experience & <br />
             <span className="text-brand-orange">Leadership Track</span>
           </h2>
-          <p className="text-base sm:text-lg text-slate-700 font-sans mt-4 font-normal leading-relaxed">
+          <p className="text-sm sm:text-lg text-slate-700 font-sans mt-3 sm:mt-4 font-normal leading-relaxed">
             Hands-on professional software engineering in an Agile development lifecycle, coupled with university-wide hackathon leadership.
           </p>
         </div>
 
         {/* Editorial Vertical Orange Timeline with Scroll-Driven Progress */}
-        <div className="relative pl-8 sm:pl-14 space-y-12 max-w-4xl">
+        <div className="relative pl-10 sm:pl-16 space-y-8 sm:space-y-12 max-w-4xl">
           {/* Base Background Track Line */}
-          <div className="absolute left-[3px] sm:left-[5px] top-4 bottom-4 w-1 bg-orange-200/80 rounded-full" />
+          <div className="absolute left-[7px] sm:left-[11px] top-4 bottom-4 w-1 bg-orange-200/80 rounded-full" />
 
           {/* Dynamic Draw-on-Scroll Electric-Orange Timeline Bar */}
           <div
             ref={timelineBarRef}
-            className="absolute left-[2px] sm:left-[4px] top-4 bottom-4 w-1.5 bg-gradient-to-b from-brand-orange via-[#FF6A00] to-brand-orange rounded-full origin-top shadow-[0_0_12px_rgba(255,85,0,0.8)]"
+            className="absolute left-[6px] sm:left-[10px] top-4 bottom-4 w-1.5 bg-gradient-to-b from-brand-orange via-[#FF6A00] to-brand-orange rounded-full origin-top shadow-[0_0_12px_rgba(255,85,0,0.8)]"
           />
 
           {/* Animated Traveling Light Beam on Timeline Line */}
-          <div className="absolute left-[2px] sm:left-[4px] top-0 bottom-0 w-1.5 overflow-hidden pointer-events-none">
+          <div className="absolute left-[6px] sm:left-[10px] top-0 bottom-0 w-1.5 overflow-hidden pointer-events-none">
             <div className="w-full h-24 bg-gradient-to-b from-transparent via-white to-transparent animate-timeline-flow" />
           </div>
 
           {/* ITEM 1: BotCalm Software Engineer Internship */}
           <div className="relative group timeline-milestone">
             {/* Prominent Glowing Electric-Orange Timeline Node */}
-            <div className="absolute -left-[45px] sm:-left-[69px] top-2 w-12 h-12 rounded-2xl bg-brand-orange text-white flex items-center justify-center shadow-lg shadow-brand-orange/50 ring-4 ring-orange-200 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 z-10">
-              <Briefcase size={20} />
+            <div className="absolute -left-[38px] sm:-left-[54px] top-2 w-9 h-9 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-brand-orange text-white flex items-center justify-center shadow-lg shadow-brand-orange/50 ring-4 ring-orange-200 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 z-10">
+              <Briefcase size={18} />
             </div>
 
             <TiltCard maxTilt={4}>
-              <div className="bg-white rounded-3xl p-8 sm:p-10 border-2 border-orange-200 hover:border-brand-orange shadow-md hover:shadow-2xl transition-all duration-300 card-hover-lift relative overflow-hidden">
+              <div className="bg-white rounded-3xl p-4 sm:p-10 border-2 border-orange-200 hover:border-brand-orange shadow-md hover:shadow-2xl transition-all duration-300 card-hover-lift relative overflow-hidden">
                 <div className="border-beam-glow" />
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
-                  <span className="px-3.5 py-1 rounded-full bg-brand-orange text-white text-xs font-mono font-bold uppercase w-max shadow-sm shadow-brand-orange/30">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-2 mb-3">
+                  <span className="px-3 py-1 rounded-full bg-brand-orange text-white text-[10px] sm:text-xs font-mono font-bold uppercase w-max shadow-sm shadow-brand-orange/30">
                     Professional Software Internship
                   </span>
-                  <span className="text-sm font-mono text-brand-orange font-bold flex items-center gap-1.5">
-                    <Calendar size={15} />
+                  <span className="text-xs sm:text-sm font-mono text-brand-orange font-bold flex items-center gap-1.5">
+                    <Calendar size={14} />
                     April 20, 2026 – October 29, 2026
                   </span>
                 </div>
 
-                <h3 className="text-2xl sm:text-3xl font-black text-slate-900 font-sans tracking-tight mb-1">
+                <h3 className="text-xl sm:text-3xl font-black text-slate-900 font-sans tracking-tight mb-1">
                   Intern Software Engineer
                 </h3>
-                <div className="text-base font-bold text-brand-orange mb-6 font-sans">
+                <div className="text-sm sm:text-base font-bold text-brand-orange mb-4 sm:mb-6 font-sans">
                   BotCalm
                 </div>
 
                 {/* Exact Verified Responsibilities */}
-                <div className="space-y-3">
+                <div className="space-y-2.5 sm:space-y-3">
                   {[
                     'React.js and Next.js development for database-driven web applications.',
                     'REST API development, endpoint documentation, and microservice integration.',
@@ -132,8 +132,8 @@ const ExperienceSection = () => {
                     'Agile collaboration with cross-functional engineering teams in daily standups and sprint reviews.',
                     'Software testing, quality assurance, code review, and systematic bug fixing.'
                   ].map((item, idx) => (
-                    <div key={idx} className="flex items-start gap-3 text-xs sm:text-sm text-slate-700 font-sans">
-                      <ChevronRight size={16} className="text-brand-orange shrink-0 mt-0.5 stroke-[3]" />
+                    <div key={idx} className="flex items-start gap-2.5 sm:gap-3 text-xs sm:text-sm text-slate-700 font-sans">
+                      <ChevronRight size={15} className="text-brand-orange shrink-0 mt-0.5 stroke-[3]" />
                       <span>{item}</span>
                     </div>
                   ))}
@@ -144,15 +144,15 @@ const ExperienceSection = () => {
 
           {/* ITEM 2: RushCoder 3.0 Hackathon Leader */}
           <div className="relative group timeline-milestone">
-            <div className="absolute -left-[45px] sm:-left-[69px] top-2 w-12 h-12 rounded-2xl bg-brand-orange text-white flex items-center justify-center shadow-lg shadow-brand-orange/50 ring-4 ring-orange-200 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 z-10">
-              <Award size={20} />
+            <div className="absolute -left-[38px] sm:-left-[54px] top-2 w-9 h-9 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-brand-orange text-white flex items-center justify-center shadow-lg shadow-brand-orange/50 ring-4 ring-orange-200 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 z-10">
+              <Award size={18} />
             </div>
 
             <TiltCard maxTilt={4}>
-              <div className="bg-white rounded-3xl p-8 sm:p-10 border-2 border-orange-200 hover:border-brand-orange shadow-md hover:shadow-2xl transition-all duration-300 card-hover-lift relative overflow-hidden">
+              <div className="bg-white rounded-3xl p-4 sm:p-10 border-2 border-orange-200 hover:border-brand-orange shadow-md hover:shadow-2xl transition-all duration-300 card-hover-lift relative overflow-hidden">
                 <div className="border-beam-glow" />
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
-                  <span className="px-3.5 py-1 rounded-full bg-orange-100 text-brand-orange text-xs font-mono font-bold uppercase w-max">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-2 mb-3">
+                  <span className="px-3 py-1 rounded-full bg-orange-100 text-brand-orange text-[10px] sm:text-xs font-mono font-bold uppercase w-max">
                     University Leadership
                   </span>
                   <span className="text-xs font-mono text-slate-600 font-bold">
@@ -160,10 +160,10 @@ const ExperienceSection = () => {
                   </span>
                 </div>
 
-                <h3 className="text-xl sm:text-2xl font-black text-slate-900 font-sans tracking-tight mb-1">
+                <h3 className="text-lg sm:text-2xl font-black text-slate-900 font-sans tracking-tight mb-1">
                   Organizing Committee Member & Public Relations Team Leader
                 </h3>
-                <div className="text-sm font-bold text-slate-700 mb-4 font-sans">
+                <div className="text-xs sm:text-sm font-bold text-slate-700 mb-3 sm:mb-4 font-sans">
                   RushCoder 3.0 Hackathon — University of Ruhuna
                 </div>
 
@@ -176,15 +176,15 @@ const ExperienceSection = () => {
 
           {/* ITEM 3: Sasnaka Sansadaya */}
           <div className="relative group timeline-milestone">
-            <div className="absolute -left-[45px] sm:-left-[69px] top-2 w-12 h-12 rounded-2xl bg-brand-orange text-white flex items-center justify-center shadow-lg shadow-brand-orange/50 ring-4 ring-orange-200 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 z-10">
-              <Users size={20} />
+            <div className="absolute -left-[38px] sm:-left-[54px] top-2 w-9 h-9 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-brand-orange text-white flex items-center justify-center shadow-lg shadow-brand-orange/50 ring-4 ring-orange-200 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 z-10">
+              <Users size={18} />
             </div>
 
             <TiltCard maxTilt={4}>
-              <div className="bg-white rounded-3xl p-8 sm:p-10 border-2 border-orange-200 hover:border-brand-orange shadow-md hover:shadow-2xl transition-all duration-300 card-hover-lift relative overflow-hidden">
+              <div className="bg-white rounded-3xl p-4 sm:p-10 border-2 border-orange-200 hover:border-brand-orange shadow-md hover:shadow-2xl transition-all duration-300 card-hover-lift relative overflow-hidden">
                 <div className="border-beam-glow" />
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
-                  <span className="px-3.5 py-1 rounded-full bg-orange-100 text-brand-orange text-xs font-mono font-bold uppercase w-max">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-2 mb-3">
+                  <span className="px-3 py-1 rounded-full bg-orange-100 text-brand-orange text-[10px] sm:text-xs font-mono font-bold uppercase w-max">
                     Community Development
                   </span>
                   <span className="text-xs font-mono text-slate-600 font-bold">
@@ -192,10 +192,10 @@ const ExperienceSection = () => {
                   </span>
                 </div>
 
-                <h3 className="text-xl sm:text-2xl font-black text-slate-900 font-sans tracking-tight mb-1">
+                <h3 className="text-lg sm:text-2xl font-black text-slate-900 font-sans tracking-tight mb-1">
                   Active Member
                 </h3>
-                <div className="text-sm font-bold text-slate-700 mb-4 font-sans">
+                <div className="text-xs sm:text-sm font-bold text-slate-700 mb-3 sm:mb-4 font-sans">
                   Sasnaka Sansadaya
                 </div>
 
