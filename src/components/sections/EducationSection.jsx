@@ -31,7 +31,8 @@ const EducationSection = () => {
         <div className="grid lg:grid-cols-12 gap-8 items-stretch">
 
           {/* CARD 1: University of Ruhuna (Col span 7) */}
-          <div className="lg:col-span-7 bg-[#FAF8F5] rounded-3xl p-8 sm:p-12 border-2 border-orange-200 hover:border-brand-orange shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between relative overflow-hidden group">
+          <div className="lg:col-span-7 bg-[#FAF8F5] rounded-3xl p-8 sm:p-12 border-2 border-orange-200 hover:border-brand-orange shadow-md hover:shadow-xl transition-all duration-300 card-hover-lift flex flex-col justify-between relative overflow-hidden group">
+            <div className="border-beam-glow" />
             {/* Ambient orange glow */}
             <div className="absolute top-0 right-0 w-80 h-80 bg-brand-orange/10 rounded-full blur-3xl pointer-events-none" />
 
@@ -93,7 +94,8 @@ const EducationSection = () => {
           </div>
 
           {/* CARD 2: St. Thomas' Boys' College Matara (Col span 5) */}
-          <div className="lg:col-span-5 bg-[#FAF8F5] rounded-3xl p-8 sm:p-10 border-2 border-orange-200 hover:border-brand-orange shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between relative overflow-hidden">
+          <div className="lg:col-span-5 bg-[#FAF8F5] rounded-3xl p-8 sm:p-10 border-2 border-orange-200 hover:border-brand-orange shadow-md hover:shadow-xl transition-all duration-300 card-hover-lift flex flex-col justify-between relative overflow-hidden group">
+            <div className="border-beam-glow" />
             <div>
               <div className="flex items-center justify-between mb-6">
                 <span className="px-3.5 py-1 rounded-full bg-orange-100 text-brand-orange text-xs font-mono font-bold uppercase">

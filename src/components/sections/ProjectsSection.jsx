@@ -1,6 +1,216 @@
 import React, { useState } from 'react';
-import { ArrowRight, ArrowUpRight, Scale, Activity, Youtube, BookOpen, Microscope, ExternalLink, Github, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Scale, ChevronLeft, ChevronRight, Maximize2, ExternalLink, Github, CheckCircle2 } from 'lucide-react';
 import { projectsData } from '../../data/projectsData';
+
+// Interactive Multi-Screenshot Component for Production Engineering Projects
+const ProductionProjectCard = ({ project, onSelectProject }) => {
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const screenshots = project.details?.gallery && project.details.gallery.length > 0
+    ? project.details.gallery
+    : [{ url: project.image, caption: project.title }];
+
+  const currentScreenshot = screenshots[activeImageIndex] || screenshots[0];
+
+  const handlePrev = (e) => {
+    e.stopPropagation();
+    setActiveImageIndex((prev) => (prev === 0 ? screenshots.length - 1 : prev - 1));
+  };
+
+  const handleNext = (e) => {
+    e.stopPropagation();
+    setActiveImageIndex((prev) => (prev === screenshots.length - 1 ? 0 : prev + 1));
+  };
+
+  const getMockUrl = (id) => {
+    switch (id) {
+      case 2: return 'medicare.health/clinical-dashboard';
+      case 3: return 'n8n.workflow/ai-automation-pipeline';
+      case 4: return 'mathsclass.portal/attendance-qr';
+      case 5: return 'plantpathology.ai/vgg19-diagnostics';
+      default: return 'project.internal/system';
+    }
+  };
+
+  return (
+    <div className="bg-white rounded-3xl p-6 sm:p-7 border-2 border-orange-200/90 hover:border-brand-orange shadow-md hover:shadow-2xl transition-all duration-300 card-hover-lift flex flex-col justify-between group relative overflow-hidden">
+      {/* Magic UI / Aceternity inspired ambient border glow */}
+      <div className="border-beam-glow" />
+
+      <div>
+        {/* Top Header Badge Row */}
+        <div className="flex items-center justify-between mb-4">
+          <span className="px-3 py-1 rounded-full bg-orange-100 text-brand-orange text-xs font-mono font-bold uppercase tracking-wide">
+            {project.category === 'ai' ? 'AUTONOMOUS WORKFLOW' : project.category === 'research' ? 'RESEARCH APPLICATION' : 'FULL-STACK SYSTEM'}
+          </span>
+
+          <div className="flex items-center gap-2">
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-orange-50 border border-orange-200 text-[10px] font-mono text-brand-orange font-bold">
+              <span className="w-1.5 h-1.5 rounded-full bg-brand-orange animate-pulse" />
+              {screenshots.length} Screenshots
+            </span>
+
+            <button
+              onClick={() => onSelectProject(project)}
+              className="w-8 h-8 rounded-full bg-orange-50 hover:bg-brand-orange text-brand-orange hover:text-white flex items-center justify-center transition-colors shadow-sm"
+              title="Open Detailed Case Study"
+            >
+              <ArrowUpRight size={15} />
+            </button>
+          </div>
+        </div>
+
+        {/* =========================================================================
+            INTERACTIVE MULTI-SCREENSHOT SHOWCASE (BROWSER MOCKUP WITH 2-3 SCREENSHOTS)
+           ========================================================================= */}
+        <div className="mb-5 bg-[#171412] rounded-2xl overflow-hidden border-2 border-orange-200/80 shadow-md group/preview">
+          {/* Simulated Browser Chrome Top Bar */}
+          <div className="bg-[#241F1A] px-3.5 py-2 flex items-center justify-between border-b border-orange-950/40">
+            <div className="flex items-center gap-1.5">
+              <span className="w-2.5 h-2.5 rounded-full bg-red-500/80 inline-block" />
+              <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80 inline-block" />
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 inline-block" />
+            </div>
+
+            <div className="bg-[#171412] px-3 py-0.5 rounded-md border border-orange-500/20 text-[10px] font-mono text-orange-200/70 truncate max-w-[200px] sm:max-w-[260px] flex items-center gap-1.5">
+              <span className="text-emerald-400">🔒</span>
+              <span>https://{getMockUrl(project.id)}</span>
+            </div>
+
+            <div className="text-[10px] font-mono text-orange-300 font-bold">
+              {activeImageIndex + 1}/{screenshots.length}
+            </div>
+          </div>
+
+          {/* Main Screenshot Viewport */}
+          <div
+            onClick={() => onSelectProject(project)}
+            className="relative aspect-[16/10] w-full overflow-hidden cursor-pointer group/image bg-slate-950"
+          >
+            <img
+              src={currentScreenshot.url}
+              alt={currentScreenshot.caption}
+              className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover/image:scale-105"
+            />
+
+            {/* Gradient Overlay & Caption */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent flex flex-col justify-end p-3.5">
+              <div className="flex items-end justify-between gap-2">
+                <div className="text-white text-xs font-sans font-semibold drop-shadow-md">
+                  <span className="text-brand-orange font-mono font-bold mr-1.5">[{activeImageIndex + 1}]</span>
+                  {currentScreenshot.caption}
+                </div>
+                <span className="hidden sm:inline-flex items-center gap-1 text-[10px] font-mono font-bold bg-white/20 hover:bg-brand-orange text-white px-2 py-0.5 rounded backdrop-blur-sm transition-colors shrink-0">
+                  <Maximize2 size={10} />
+                  <span>Expand</span>
+                </span>
+              </div>
+            </div>
+
+            {/* Left & Right Arrow Navigation Overlays */}
+            {screenshots.length > 1 && (
+              <>
+                <button
+                  onClick={handlePrev}
+                  className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/60 hover:bg-brand-orange text-white flex items-center justify-center transition-all opacity-80 hover:opacity-100 hover:scale-110 shadow-lg backdrop-blur-sm"
+                  title="Previous screenshot"
+                >
+                  <ChevronLeft size={16} />
+                </button>
+                <button
+                  onClick={handleNext}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/60 hover:bg-brand-orange text-white flex items-center justify-center transition-all opacity-80 hover:opacity-100 hover:scale-110 shadow-lg backdrop-blur-sm"
+                  title="Next screenshot"
+                >
+                  <ChevronRight size={16} />
+                </button>
+              </>
+            )}
+          </div>
+
+          {/* Multi-Screenshot Thumbnail Selector Row */}
+          {screenshots.length > 1 && (
+            <div className="bg-[#1C1714] p-2 flex items-center gap-2 border-t border-orange-950/40 overflow-x-auto custom-scrollbar">
+              {screenshots.map((s, sIdx) => {
+                const isActive = sIdx === activeImageIndex;
+                return (
+                  <button
+                    key={sIdx}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setActiveImageIndex(sIdx);
+                    }}
+                    className={`relative rounded-lg overflow-hidden border-2 transition-all flex items-center gap-2 px-2 py-1 shrink-0 ${
+                      isActive
+                        ? 'border-brand-orange bg-brand-orange/20 ring-1 ring-brand-orange'
+                        : 'border-white/10 bg-white/5 opacity-60 hover:opacity-100 hover:border-orange-400/50'
+                    }`}
+                  >
+                    <img
+                      src={s.url}
+                      alt={s.caption}
+                      className="w-8 h-5 object-cover rounded shrink-0"
+                    />
+                    <span className={`text-[10px] font-mono truncate max-w-[120px] text-left ${isActive ? 'text-white font-bold' : 'text-slate-300'}`}>
+                      {s.caption.split('&')[0].trim()}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          )}
+        </div>
+
+        {/* Project Titles */}
+        <h4 className="text-xl sm:text-2xl font-black text-slate-900 font-sans tracking-tight mb-1.5 group-hover:text-brand-orange transition-colors">
+          {project.title}
+        </h4>
+        <div className="text-xs font-bold text-brand-orange mb-3 font-sans">
+          {project.subtitle}
+        </div>
+        <p className="text-xs sm:text-sm text-slate-600 font-sans leading-relaxed font-normal mb-5">
+          {project.description}
+        </p>
+
+        {/* Architecture Highlight Block */}
+        <div className="bg-[#FAF8F5] rounded-2xl p-4 border border-orange-100 mb-5">
+          <span className="text-[10px] font-mono text-brand-orange uppercase font-bold tracking-wider block mb-2">
+            CORE ARCHITECTURAL FEATURES
+          </span>
+          <div className="text-xs font-sans text-slate-700 space-y-1.5">
+            {project.details.features.slice(0, 2).map((feat, fIdx) => (
+              <div key={fIdx} className="flex items-start gap-2">
+                <span className="text-brand-orange font-bold">▹</span>
+                <span>{feat}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom Tags & Action */}
+      <div className="pt-4 border-t border-orange-100 flex items-center justify-between">
+        <div className="flex flex-wrap gap-1.5">
+          {project.tags.slice(0, 3).map((tag, tIdx) => (
+            <span
+              key={tIdx}
+              className="px-2.5 py-0.5 rounded-md bg-orange-50 border border-orange-200 text-[11px] font-mono font-semibold text-brand-orange"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+
+        <button
+          onClick={() => onSelectProject(project)}
+          className="text-xs font-mono font-bold text-brand-orange hover:text-slate-900 transition-colors flex items-center gap-1 group/btn"
+        >
+          <span>CASE STUDY</span>
+          <span className="group-hover/btn:translate-x-1 transition-transform">→</span>
+        </button>
+      </div>
+    </div>
+  );
+};
 
 const ProjectsSection = ({ onSelectProject }) => {
   const [activePipelineStep, setActivePipelineStep] = useState(3);
@@ -182,77 +392,13 @@ const ProjectsSection = ({ onSelectProject }) => {
         </div>
 
         <div className="grid md:grid-cols-2 gap-8">
-          {secondaryProjects.map((project) => {
-            return (
-              <div
-                key={project.id}
-                className="bg-white rounded-3xl p-8 border-2 border-orange-200 hover:border-brand-orange shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between group"
-              >
-                <div>
-                  {/* Top Badge Row */}
-                  <div className="flex items-center justify-between mb-6">
-                    <span className="px-3 py-1 rounded-full bg-orange-100 text-brand-orange text-xs font-mono font-bold uppercase">
-                      {project.category === 'ai' ? 'AUTONOMOUS WORKFLOW' : 'FULL-STACK SYSTEM'}
-                    </span>
-                    <button
-                      onClick={() => onSelectProject(project)}
-                      className="w-10 h-10 rounded-full bg-orange-50 hover:bg-brand-orange text-brand-orange hover:text-white flex items-center justify-center transition-colors shadow-sm"
-                      title="Open Case Study"
-                    >
-                      <ArrowUpRight size={18} />
-                    </button>
-                  </div>
-
-                  <h4 className="text-2xl font-black text-slate-900 font-sans tracking-tight mb-2 group-hover:text-brand-orange transition-colors">
-                    {project.title}
-                  </h4>
-                  <div className="text-xs font-bold text-brand-orange mb-4 font-sans">
-                    {project.subtitle}
-                  </div>
-                  <p className="text-xs sm:text-sm text-slate-600 font-sans leading-relaxed font-normal mb-6">
-                    {project.description}
-                  </p>
-
-                  {/* Architecture Highlight Block */}
-                  <div className="bg-[#FAF8F5] rounded-2xl p-4 border border-orange-100 mb-6">
-                    <span className="text-[10px] font-mono text-brand-orange uppercase font-bold tracking-wider block mb-2">
-                      CORE ARCHITECTURAL FEATURES
-                    </span>
-                    <div className="text-xs font-sans text-slate-700 space-y-1.5">
-                      {project.details.features.slice(0, 2).map((feat, fIdx) => (
-                        <div key={fIdx} className="flex items-start gap-2">
-                          <span className="text-brand-orange font-bold">▹</span>
-                          <span>{feat}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Bottom Tags & Action */}
-                <div className="pt-6 border-t border-orange-100 flex items-center justify-between">
-                  <div className="flex flex-wrap gap-1.5">
-                    {project.tags.slice(0, 3).map((tag, tIdx) => (
-                      <span
-                        key={tIdx}
-                        className="px-2.5 py-0.5 rounded-md bg-orange-50 border border-orange-200 text-[11px] font-mono font-semibold text-brand-orange"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-
-                  <button
-                    onClick={() => onSelectProject(project)}
-                    className="text-xs font-mono font-bold text-brand-orange hover:text-slate-900 transition-colors flex items-center gap-1"
-                  >
-                    <span>CASE STUDY</span>
-                    <span>→</span>
-                  </button>
-                </div>
-              </div>
-            );
-          })}
+          {secondaryProjects.map((project) => (
+            <ProductionProjectCard
+              key={project.id}
+              project={project}
+              onSelectProject={onSelectProject}
+            />
+          ))}
         </div>
 
       </div>

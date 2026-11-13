@@ -40,13 +40,14 @@ const AboutSection = () => {
 
           {/* LEFT: Contextual Credentials (Col span 3) */}
           <div className="lg:col-span-3 flex flex-col justify-between gap-4">
-            <div className="bg-white rounded-3xl p-6 border-2 border-orange-200/80 shadow-md flex flex-col justify-between h-full">
+            <div className="bg-white rounded-3xl p-6 border-2 border-orange-200/80 shadow-md card-hover-lift relative overflow-hidden group flex flex-col justify-between h-full">
+              <div className="border-beam-glow" />
               <div>
                 <span className="text-[11px] font-mono text-brand-orange font-bold uppercase tracking-wider block mb-4">
                   ACADEMIC FOUNDATION
                 </span>
-                <div className="flex items-start gap-3.5 mb-6">
-                  <div className="w-10 h-10 rounded-2xl bg-orange-500 text-white flex items-center justify-center shrink-0 shadow-md shadow-brand-orange/30">
+                <div className="flex items-start gap-3.5 mb-6 group/item">
+                  <div className="w-10 h-10 rounded-2xl bg-orange-500 text-white flex items-center justify-center shrink-0 shadow-md shadow-brand-orange/30 group-hover/item:scale-110 transition-transform">
                     <GraduationCap size={20} />
                   </div>
                   <div>
@@ -65,8 +66,8 @@ const AboutSection = () => {
                 <span className="text-[11px] font-mono text-brand-orange font-bold uppercase tracking-wider block mb-4 pt-4 border-t border-orange-100">
                   INDUSTRY INTERNSHIP
                 </span>
-                <div className="flex items-start gap-3.5 mb-6">
-                  <div className="w-10 h-10 rounded-2xl bg-orange-500 text-white flex items-center justify-center shrink-0 shadow-md shadow-brand-orange/30">
+                <div className="flex items-start gap-3.5 mb-6 group/item">
+                  <div className="w-10 h-10 rounded-2xl bg-orange-500 text-white flex items-center justify-center shrink-0 shadow-md shadow-brand-orange/30 group-hover/item:scale-110 transition-transform">
                     <Briefcase size={20} />
                   </div>
                   <div>

@@ -186,7 +186,8 @@ const ResearchSection = ({ navigateToResearch }) => {
           <div className="grid md:grid-cols-3 gap-6">
 
             {/* Publication 1: APSURS 2025 */}
-            <div className="bg-white rounded-3xl p-7 border-2 border-orange-200 hover:border-brand-orange shadow-md hover:shadow-xl transition-all flex flex-col justify-between group">
+            <div className="bg-white rounded-3xl p-7 border-2 border-orange-200 hover:border-brand-orange shadow-md hover:shadow-xl transition-all card-hover-lift relative overflow-hidden flex flex-col justify-between group">
+              <div className="border-beam-glow" />
               <div>
                 <div className="flex items-center justify-between mb-4">
                   <span className="px-3 py-1 rounded-full bg-orange-100 text-brand-orange text-xs font-mono font-bold">
@@ -215,7 +216,8 @@ const ResearchSection = ({ navigateToResearch }) => {
             </div>
 
             {/* Publication 2: RITSCON 2026 */}
-            <div className="bg-white rounded-3xl p-7 border-2 border-orange-200 hover:border-brand-orange shadow-md hover:shadow-xl transition-all flex flex-col justify-between group">
+            <div className="bg-white rounded-3xl p-7 border-2 border-orange-200 hover:border-brand-orange shadow-md hover:shadow-xl transition-all card-hover-lift relative overflow-hidden flex flex-col justify-between group">
+              <div className="border-beam-glow" />
               <div>
                 <div className="flex items-center justify-between mb-4">
                   <span className="px-3 py-1 rounded-full bg-orange-100 text-brand-orange text-xs font-mono font-bold">
@@ -244,7 +246,8 @@ const ResearchSection = ({ navigateToResearch }) => {
             </div>
 
             {/* Publication 3: Planned Open Dataset */}
-            <div className="bg-white rounded-3xl p-7 border-2 border-orange-200 shadow-md flex flex-col justify-between">
+            <div className="bg-white rounded-3xl p-7 border-2 border-orange-200 hover:border-brand-orange shadow-md hover:shadow-xl transition-all card-hover-lift relative overflow-hidden flex flex-col justify-between group">
+              <div className="border-beam-glow" />
               <div>
                 <div className="flex items-center justify-between mb-4">
                   <span className="px-3 py-1 rounded-full bg-orange-100 text-brand-orange text-xs font-mono font-bold">
@@ -253,7 +256,7 @@ const ResearchSection = ({ navigateToResearch }) => {
                   <span className="text-xs font-mono text-slate-500 font-semibold">Planned: Dec 2026</span>
                 </div>
 
-                <h4 className="text-lg font-bold text-slate-900 font-sans leading-snug mb-3">
+                <h4 className="text-lg font-bold text-slate-900 font-sans leading-snug mb-3 group-hover:text-brand-orange transition-colors">
                   Rice Plant Leaf Disease Image Dataset
                 </h4>
                 <p className="text-xs text-slate-600 font-sans leading-relaxed">

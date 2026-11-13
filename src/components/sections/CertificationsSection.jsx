@@ -39,8 +39,9 @@ const CertificationsSection = () => {
             return (
               <div
                 key={index}
-                className="group bg-white rounded-3xl p-8 border-2 border-orange-200 hover:border-brand-orange shadow-md hover:shadow-2xl transition-all duration-300 flex flex-col justify-between relative overflow-hidden"
+                className="group bg-white rounded-3xl p-8 border-2 border-orange-200 hover:border-brand-orange shadow-md hover:shadow-2xl transition-all duration-300 card-hover-lift flex flex-col justify-between relative overflow-hidden"
               >
+                <div className="border-beam-glow" />
                 {/* Top Orange Gradient Bar */}
                 <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-brand-orange via-amber-400 to-orange-600" />
 

@@ -29,15 +29,20 @@ const ExperienceSection = () => {
 
         {/* Editorial Vertical Orange Timeline */}
         <div className="relative pl-8 sm:pl-14 border-l-4 border-brand-orange space-y-12 max-w-4xl">
+          {/* Animated Traveling Light Beam on Timeline Line */}
+          <div className="absolute -left-[4px] top-0 bottom-0 w-1 overflow-hidden pointer-events-none">
+            <div className="w-full h-24 bg-gradient-to-b from-transparent via-white to-transparent animate-timeline-flow" />
+          </div>
 
           {/* ITEM 1: BotCalm Software Engineer Internship */}
           <div className="relative group">
             {/* Prominent Glowing Electric-Orange Timeline Node */}
-            <div className="absolute -left-[49px] sm:-left-[73px] top-2 w-12 h-12 rounded-2xl bg-brand-orange text-white flex items-center justify-center shadow-lg shadow-brand-orange/50 ring-4 ring-orange-200">
+            <div className="absolute -left-[49px] sm:-left-[73px] top-2 w-12 h-12 rounded-2xl bg-brand-orange text-white flex items-center justify-center shadow-lg shadow-brand-orange/50 ring-4 ring-orange-200 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
               <Briefcase size={20} />
             </div>
 
-            <div className="bg-white rounded-3xl p-8 sm:p-10 border-2 border-orange-200 hover:border-brand-orange shadow-md hover:shadow-2xl transition-all duration-300">
+            <div className="bg-white rounded-3xl p-8 sm:p-10 border-2 border-orange-200 hover:border-brand-orange shadow-md hover:shadow-2xl transition-all duration-300 card-hover-lift relative overflow-hidden">
+              <div className="border-beam-glow" />
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
                 <span className="px-3.5 py-1 rounded-full bg-brand-orange text-white text-xs font-mono font-bold uppercase w-max shadow-sm shadow-brand-orange/30">
                   Professional Software Internship

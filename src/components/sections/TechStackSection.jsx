@@ -131,7 +131,7 @@ const TechStackSection = () => {
                   {/* Layer Card */}
                   <div
                     onClick={() => setSelectedLayerId(layer.id)}
-                    className={`cursor-pointer rounded-2xl p-5 border-2 transition-all duration-300 flex items-center justify-between shadow-sm ${
+                    className={`cursor-pointer rounded-2xl p-5 border-2 transition-all duration-300 card-hover-lift flex items-center justify-between shadow-sm ${
                       isSelected
                         ? 'bg-gradient-to-r from-[#240B02] to-[#3B1304] text-white border-brand-orange ring-4 ring-brand-orange/20 shadow-xl shadow-brand-orange/20 translate-x-2'
                         : 'bg-white border-orange-100 hover:border-brand-orange hover:bg-orange-50/50'
