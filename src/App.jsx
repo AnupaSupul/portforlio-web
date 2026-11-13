@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ArrowRight, Linkedin, Github, Mail, FileText } from 'lucide-react';
+import { Menu, X, Linkedin, Github, Mail, FileText } from 'lucide-react';
 import MainView from './components/MainView';
 import ResearchView from './components/ResearchView';
 import NavLink from './components/NavLink';
 import ContactSection from './components/sections/ContactSection';
+import ScrollProgress from './components/common/ScrollProgress';
+import { useSmoothScroll, scrollToTarget } from './hooks/useSmoothScroll';
 
 const App = () => {
   const [currentView, setCurrentView] = useState('main'); // 'main' | 'research'
   const [activeSection, setActiveSection] = useState('home');
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Initialize Lenis + GSAP ScrollTrigger synchronization
+  useSmoothScroll();
 
   // Handle scroll for navbar styling and active section tracking
   useEffect(() => {
@@ -53,7 +58,7 @@ const App = () => {
     // If navigating to Research page
     if (id === 'research-page') {
       setCurrentView('research');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      scrollToTarget(0);
       setActiveSection('research');
       return;
     }
@@ -62,19 +67,17 @@ const App = () => {
     if (currentView === 'research') {
       setCurrentView('main');
       setTimeout(() => {
-        const element = document.getElementById(id);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
+        if (id === 'home') {
+          scrollToTarget(0);
         } else {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
+          scrollToTarget(`#${id}`);
         }
       }, 100);
     } else {
-      const element = document.getElementById(id);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      } else if (id === 'home') {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (id === 'home') {
+        scrollToTarget(0);
+      } else {
+        scrollToTarget(`#${id}`);
       }
     }
     setActiveSection(id);
@@ -82,6 +85,8 @@ const App = () => {
 
   return (
     <div className="min-h-screen bg-[#FAF8F5] font-sans text-slate-800 selection:bg-brand-orange selection:text-white overflow-x-hidden">
+      {/* Scroll Progress Bar */}
+      <ScrollProgress />
 
       {/* Sticky Navigation (Appears smoothly when scrolled past hero) */}
       <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled

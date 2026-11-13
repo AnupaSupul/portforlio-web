@@ -1,8 +1,15 @@
-import React, { useState } from 'react';
-import { Layers, Server, Database, Cpu, Cloud, Code, CheckCircle2 } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Server, Database, Cpu, Cloud, Code, CheckCircle2, Sparkles, Activity } from 'lucide-react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import TiltCard from '../common/TiltCard';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const TechStackSection = () => {
   const [selectedLayerId, setSelectedLayerId] = useState('application'); // 'frontend' | 'application' | 'data' | 'ai' | 'infrastructure'
+  const sectionRef = useRef(null);
+  const layersListRef = useRef(null);
 
   const layers = [
     {
@@ -84,8 +91,33 @@ const TechStackSection = () => {
 
   const activeLayer = layers.find(l => l.id === selectedLayerId) || layers[1];
 
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion || !sectionRef.current) return;
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        '.tech-layer-item',
+        { opacity: 0, x: -25 },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 0.7,
+          stagger: 0.1,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: layersListRef.current,
+            start: 'top 85%',
+          },
+        }
+      );
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section id="skills" className="py-28 lg:py-36 bg-gradient-to-b from-[#FFF7ED] via-[#FAF8F5] to-[#FFF7ED] text-slate-900 relative overflow-hidden border-t-2 border-orange-200">
+    <section id="skills" ref={sectionRef} className="py-28 lg:py-36 bg-gradient-to-b from-[#FFF7ED] via-[#FAF8F5] to-[#FFF7ED] text-slate-900 relative overflow-hidden border-t-2 border-orange-200">
       {/* Radiant orange ambient lighting */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[600px] bg-brand-orange/15 rounded-full blur-[190px] pointer-events-none" />
       <div className="absolute inset-0 bg-[radial-gradient(#fed7aa_1px,transparent_1px)] [background-size:24px_24px] opacity-40 pointer-events-none" />
@@ -116,10 +148,13 @@ const TechStackSection = () => {
         <div className="grid lg:grid-cols-12 gap-8 items-start">
 
           {/* LEFT: Full Interactive Architecture System (Col span 7) */}
-          <div className="lg:col-span-7 flex flex-col gap-3.5">
+          <div ref={layersListRef} className="lg:col-span-7 flex flex-col gap-3.5">
             <div className="flex items-center justify-between text-xs font-mono text-brand-orange font-bold pb-2 px-1 border-b border-orange-200 mb-2">
-              <span>SYSTEM ARCHITECTURE LAYERS</span>
-              <span>SELECT LAYER TO INSPECT DATA FLOW</span>
+              <span className="flex items-center gap-1.5">
+                <Activity size={14} className="text-brand-orange animate-pulse" />
+                <span>INTERCONNECTED SYSTEM ARCHITECTURE</span>
+              </span>
+              <span>CLICK TO INSPECT LAYER</span>
             </div>
 
             {layers.map((layer, index) => {
@@ -127,11 +162,11 @@ const TechStackSection = () => {
               const Icon = layer.icon;
 
               return (
-                <div key={layer.id} className="relative">
+                <div key={layer.id} className="relative tech-layer-item">
                   {/* Layer Card */}
                   <div
                     onClick={() => setSelectedLayerId(layer.id)}
-                    className={`cursor-pointer rounded-2xl p-5 border-2 transition-all duration-300 card-hover-lift flex items-center justify-between shadow-sm ${
+                    className={`cursor-pointer rounded-2xl p-5 border-2 transition-all duration-300 card-hover-lift flex items-center justify-between shadow-sm group ${
                       isSelected
                         ? 'bg-gradient-to-r from-[#240B02] to-[#3B1304] text-white border-brand-orange ring-4 ring-brand-orange/20 shadow-xl shadow-brand-orange/20 translate-x-2'
                         : 'bg-white border-orange-100 hover:border-brand-orange hover:bg-orange-50/50'
@@ -139,7 +174,7 @@ const TechStackSection = () => {
                   >
                     <div className="flex items-center gap-4">
                       {/* Layer Step Badge */}
-                      <span className={`text-xs font-mono font-bold px-3 py-1 rounded-xl shadow-sm ${
+                      <span className={`text-xs font-mono font-bold px-3 py-1 rounded-xl shadow-sm transition-colors ${
                         isSelected ? 'bg-brand-orange text-white' : 'bg-orange-100 text-brand-orange'
                       }`}>
                         {layer.number}
@@ -147,7 +182,7 @@ const TechStackSection = () => {
 
                       {/* Icon & Title */}
                       <div className="flex items-center gap-3">
-                        <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 shadow-sm ${
+                        <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 shadow-sm transition-transform group-hover:scale-105 ${
                           isSelected ? 'bg-brand-orange text-white' : 'bg-orange-50 border border-orange-200 text-brand-orange'
                         }`}>
                           <Icon size={20} />
@@ -169,20 +204,23 @@ const TechStackSection = () => {
 
                     <div className="flex items-center gap-2">
                       {isSelected && (
-                        <span className="hidden sm:inline-block text-[10px] font-mono font-bold text-white uppercase bg-brand-orange px-2.5 py-1 rounded-full shadow-md animate-pulse">
-                          Active Layer
+                        <span className="hidden sm:inline-flex items-center gap-1.5 text-[10px] font-mono font-bold text-white uppercase bg-brand-orange px-2.5 py-1 rounded-full shadow-md animate-pulse">
+                          <span className="w-1.5 h-1.5 rounded-full bg-white" />
+                          <span>Active Layer</span>
                         </span>
                       )}
-                      <span className={`text-base font-bold transition-transform duration-300 ${isSelected ? 'text-brand-orange rotate-90' : 'text-slate-400'}`}>
+                      <span className={`text-base font-bold transition-transform duration-300 ${isSelected ? 'text-brand-orange rotate-90' : 'text-slate-400 group-hover:translate-x-1'}`}>
                         →
                       </span>
                     </div>
                   </div>
 
-                  {/* Visual Data Flow Arrow Between Layers */}
+                  {/* Visual Data Flow Arrow Between Layers with illuminated pulse */}
                   {index < layers.length - 1 && (
-                    <div className="flex justify-center my-1.5">
-                      <div className={`w-1 h-3 rounded-full transition-colors ${isSelected ? 'bg-brand-orange shadow-md shadow-brand-orange/50' : 'bg-orange-300'}`} />
+                    <div className="flex justify-center my-1.5 relative">
+                      <div className={`w-1 h-3.5 rounded-full transition-colors ${
+                        isSelected ? 'bg-brand-orange shadow-md shadow-brand-orange/50 animate-pulse' : 'bg-orange-200'
+                      }`} />
                     </div>
                   )}
                 </div>
@@ -190,63 +228,68 @@ const TechStackSection = () => {
             })}
           </div>
 
-          {/* RIGHT: Active Layer Inspection Card (Col span 5) */}
-          <div className="lg:col-span-5 bg-gradient-to-br from-[#240B02] via-[#3B1304] to-[#1A0701] rounded-3xl p-8 border-2 border-brand-orange text-white shadow-2xl relative overflow-hidden sticky top-28">
-            {/* Top orange glow */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-brand-orange/20 rounded-full blur-3xl pointer-events-none" />
+          {/* RIGHT: Active Layer Inspection Card (Col span 5) with TiltCard */}
+          <div className="lg:col-span-5 sticky top-28">
+            <TiltCard maxTilt={5}>
+              <div className="bg-gradient-to-br from-[#240B02] via-[#3B1304] to-[#1A0701] rounded-3xl p-8 border-2 border-brand-orange text-white shadow-2xl relative overflow-hidden group/detail">
+                {/* Top orange glow with subtle pulse */}
+                <div className="absolute top-0 right-0 w-64 h-64 bg-brand-orange/20 rounded-full blur-3xl pointer-events-none animate-pulse-slow" />
 
-            <div className="flex items-center justify-between mb-6">
-              <div className="flex items-center gap-3.5">
-                <div className="w-12 h-12 rounded-2xl bg-brand-orange text-white flex items-center justify-center shadow-lg shadow-brand-orange/40">
-                  <activeLayer.icon size={26} />
+                <div className="flex items-center justify-between mb-6 relative z-10">
+                  <div className="flex items-center gap-3.5">
+                    <div className="w-12 h-12 rounded-2xl bg-brand-orange text-white flex items-center justify-center shadow-lg shadow-brand-orange/40">
+                      <activeLayer.icon size={26} />
+                    </div>
+                    <div>
+                      <span className="text-[10px] font-mono text-orange-300 font-bold uppercase tracking-wider block">
+                        LAYER {activeLayer.number} SPECIFICATION
+                      </span>
+                      <h3 className="text-xl font-black text-white font-sans tracking-tight">
+                        {activeLayer.title}
+                      </h3>
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <span className="text-[10px] font-mono text-orange-300 font-bold uppercase tracking-wider block">
-                    LAYER {activeLayer.number} SPECIFICATION
+
+                <p className="text-xs sm:text-sm text-orange-100 font-sans leading-relaxed mb-6 font-light relative z-10">
+                  {activeLayer.subtitle}
+                </p>
+
+                {/* Detailed Technology Nodes (Full Names + Roles) */}
+                <div className="space-y-3 mb-6 relative z-10">
+                  <span className="text-[11px] font-mono text-orange-300 uppercase font-bold tracking-wider block flex items-center gap-1.5">
+                    <Sparkles size={12} className="text-brand-orange" />
+                    <span>ENGINEERED TECHNOLOGIES & ROLES</span>
                   </span>
-                  <h3 className="text-xl font-black text-white font-sans tracking-tight">
-                    {activeLayer.title}
-                  </h3>
+
+                  {activeLayer.technologies.map((tech, idx) => (
+                    <div
+                      key={idx}
+                      className="bg-[#2E1106]/90 backdrop-blur-sm rounded-2xl p-3.5 border border-orange-500/40 hover:border-brand-orange hover:bg-[#3B1508] transition-all flex items-center justify-between shadow-sm hover:translate-x-1"
+                    >
+                      <div className="flex items-center gap-2.5">
+                        <span className="w-2 h-2 rounded-full bg-brand-orange shadow-sm animate-pulse-dot" />
+                        <span className="text-sm font-bold text-white font-sans">
+                          {tech.name}
+                        </span>
+                      </div>
+                      <span className="text-xs font-mono text-orange-200">
+                        {tech.role}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Architecture Integration Notice */}
+                <div className="pt-4 border-t border-orange-500/30 flex items-center justify-between text-xs font-mono text-orange-200 relative z-10">
+                  <span className="flex items-center gap-1.5 text-emerald-400 font-bold">
+                    <CheckCircle2 size={14} />
+                    Verified in Production
+                  </span>
+                  <span className="text-orange-300">Zero Unverified Claims</span>
                 </div>
               </div>
-            </div>
-
-            <p className="text-xs sm:text-sm text-orange-100 font-sans leading-relaxed mb-6 font-light">
-              {activeLayer.subtitle}
-            </p>
-
-            {/* Detailed Technology Nodes (Full Names + Roles) */}
-            <div className="space-y-3 mb-6">
-              <span className="text-[11px] font-mono text-orange-300 uppercase font-bold tracking-wider block">
-                ENGINEERED TECHNOLOGIES & ROLES
-              </span>
-
-              {activeLayer.technologies.map((tech, idx) => (
-                <div
-                  key={idx}
-                  className="bg-[#2E1106] rounded-2xl p-3.5 border border-orange-500/40 hover:border-brand-orange transition-colors flex items-center justify-between shadow-sm"
-                >
-                  <div className="flex items-center gap-2.5">
-                    <span className="w-2 h-2 rounded-full bg-brand-orange shadow-sm" />
-                    <span className="text-sm font-bold text-white font-sans">
-                      {tech.name}
-                    </span>
-                  </div>
-                  <span className="text-xs font-mono text-orange-200">
-                    {tech.role}
-                  </span>
-                </div>
-              ))}
-            </div>
-
-            {/* Architecture Integration Notice */}
-            <div className="pt-4 border-t border-orange-500/30 flex items-center justify-between text-xs font-mono text-orange-200">
-              <span className="flex items-center gap-1.5 text-emerald-400 font-bold">
-                <CheckCircle2 size={14} />
-                Verified in Production
-              </span>
-              <span className="text-orange-300">Zero Unverified Claims</span>
-            </div>
+            </TiltCard>
           </div>
 
         </div>
